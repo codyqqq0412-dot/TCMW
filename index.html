@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>漆膜厚度查詢 | PT. Tongcheng v4</title>
+<title>漆膜厚度查詢 | PT. Tongcheng v5</title>
 <style>
 :root{
   --green:#1A5C3A;--green-l:#EDF7F0;--green-m:#D4EDDA;
@@ -24,19 +24,13 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:14px;color:var(--text);background:#F7F8FA;min-height:100vh}
-
-/* ── header ── */
 .header{background:var(--green);padding:14px 16px;color:#fff}
 .header h1{font-size:17px;font-weight:600;margin-bottom:2px}
 .header p{font-size:12px;opacity:.8;line-height:1.4}
 .header .ver{font-size:10px;opacity:.6;margin-top:3px}
-
-/* ── lang toggle ── */
 .lang-bar{display:flex;gap:6px;padding:10px 16px;background:#fff;border-bottom:0.5px solid var(--border)}
 .lang-btn{flex:1;padding:7px;font-size:13px;font-weight:500;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--gray-ll);color:var(--text2);cursor:pointer;-webkit-appearance:none;appearance:none}
 .lang-btn.active{background:var(--green);color:#fff;border-color:var(--green)}
-
-/* ── input card ── */
 .card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;margin:12px;border:0.5px solid var(--border)}
 .card-title{font-size:14px;font-weight:600;color:var(--green);margin-bottom:12px}
 .field{margin-bottom:12px}
@@ -49,22 +43,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .tbtn{flex:1;padding:10px;font-size:13px;font-weight:600;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--gray-ll);color:var(--text2);cursor:pointer;transition:all .15s;-webkit-appearance:none;appearance:none}
 .tbtn.cu{background:var(--blue-l);border-color:var(--blue);color:#0C447C}
 .tbtn.al{background:var(--amber-l);border-color:var(--amber);color:#633806}
-.search-btn{width:100%;padding:12px;font-size:15px;font-weight:600;background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;margin-top:4px;letter-spacing:.3px;-webkit-appearance:none;appearance:none}
+.search-btn{width:100%;padding:12px;font-size:15px;font-weight:600;background:var(--green);color:#fff;border:none;border-radius:var(--radius-sm);cursor:pointer;margin-top:4px;-webkit-appearance:none;appearance:none}
 .search-btn:active{opacity:.85}
-
-/* ── BDV warning banner ── */
 .bdv-warn-banner{background:var(--warn-l);border:0.5px solid #E8B84B;border-radius:var(--radius-sm);padding:9px 12px;margin-bottom:10px;display:flex;gap:8px;align-items:flex-start}
 .bdv-warn-banner .icon{font-size:15px;line-height:1.4;flex-shrink:0}
 .bdv-warn-banner .txt{font-size:11.5px;color:var(--warn);line-height:1.5;font-weight:500}
-
-/* ── results ── */
 .results{margin:0 12px 20px}
 .metal-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 12px;border-radius:99px;margin-bottom:6px}
 .metal-tag.cu{background:var(--blue-l);color:#0C447C}
 .metal-tag.al{background:var(--amber-l);color:#633806}
 .std-note{font-size:11px;color:var(--text3);margin-bottom:10px}
-
-/* ── grade card ── */
 .gc{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:0.5px solid var(--border);margin-bottom:10px;overflow:hidden}
 .gc-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
 .gc-head-left{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
@@ -80,33 +68,29 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .gc.g3 .gc-head{background:var(--amber-ll)}
 .gc.g3 .gc-num,.gc.g3 .gc-name{color:var(--amber)}
 .gc.g3 .gc-jis-tag{background:#FFE0B2;color:var(--amber)}
-
 .gc-body{padding:12px 14px}
 .std-block{margin-bottom:10px}
 .std-block:last-child{margin-bottom:0}
 .std-label{font-size:10.5px;font-weight:600;letter-spacing:.05em;color:var(--text3);margin-bottom:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap}
-.std-label .badge{font-size:10px;padding:1px 6px;border-radius:3px;font-weight:700;text-transform:none}
+.std-label .badge{font-size:10px;padding:1px 6px;border-radius:3px;font-weight:700}
 .iec-badge{background:var(--blue-l);color:#0C447C}
 .jis-badge{background:var(--purple-l);color:var(--purple)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px}
-.kv .k{font-size:10.5px;color:var(--text3);margin-bottom:2px}
+.kv .k{font-size:10.5px;color:var(--text3);margin-bottom:2px;line-height:1.3}
 .kv .v{font-size:13px;font-weight:600}
 .kv .v.c-green{color:var(--pass)}
 .kv .v.c-blue{color:var(--blue)}
 .kv .v.c-amber{color:var(--amber)}
 .kv .v.c-purple{color:var(--purple)}
 .kv .v.c-red{color:var(--red)}
+.kv .v.c-gray{color:var(--text3)}
 .diff-tag{font-size:10px;padding:1px 5px;border-radius:3px;margin-left:4px;font-weight:600}
 .d-more{background:var(--red-l);color:var(--red)}
 .d-same{background:var(--pass-l);color:var(--pass)}
 .divider{height:0.5px;background:var(--border);margin:10px 0}
-
-/* ── BDV method tag ── */
 .method-tag{font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;display:inline-block;margin-left:4px}
 .method-twist{background:#E3F2FD;color:#1565C0}
 .method-ball{background:var(--red-l);color:var(--red)}
-
-/* ── actual box ── */
 .actual-box{background:var(--gray-ll);border-radius:var(--radius-sm);padding:10px 12px;margin-top:10px;border:0.5px solid var(--border)}
 .actual-title{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:7px}
 .arow{display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:0.5px solid var(--border);font-size:12px}
@@ -114,8 +98,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .arow .al{color:var(--text2)}
 .arow .av{font-weight:600}
 .av.pass{color:var(--pass)}.av.warn{color:var(--amber)}.av.fail{color:var(--red)}
-
-/* ── grade mapping table ── */
 .grade-map{background:var(--gray-ll);border-radius:var(--radius-sm);padding:9px 12px;margin-bottom:10px;border:0.5px solid var(--border)}
 .grade-map-title{font-size:10.5px;font-weight:600;color:var(--text2);margin-bottom:6px}
 .grade-map-row{display:flex;align-items:center;gap:6px;font-size:11px;margin-bottom:4px}
@@ -124,11 +106,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 .gm-arrow{color:var(--text3);font-size:12px}
 .gm-jis{background:var(--purple-l);color:var(--purple);font-weight:700;padding:2px 7px;border-radius:3px;font-size:10.5px;min-width:60px;text-align:center}
 .gm-desc{color:var(--text2);font-size:10.5px}
-
-/* ── no data ── */
+/* 最小完成外徑說明框 */
+.min-od-note{background:#E8F5E9;border:0.5px solid #81C784;border-radius:var(--radius-sm);padding:7px 10px;margin-bottom:8px;font-size:11px;color:#2E7D32;line-height:1.5}
 .no-data{text-align:center;padding:30px 20px;color:var(--text3);font-size:13px;line-height:1.6}
-
-/* ── footer ── */
 .footer{text-align:center;padding:16px;font-size:11px;color:var(--text3);border-top:0.5px solid var(--border);margin-top:8px}
 </style>
 </head>
@@ -491,21 +471,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
 
 })();
 </script>
-<body>
+
 
 <div class="header">
   <h1>PT. Tongcheng — 漆膜厚度查詢系統</h1>
   <p>Sistem Pencarian Standar Tebal Film Kawat Enamel<br>IEC 60317 &amp; JIS C 3202 — CU / AL</p>
-  <div class="ver">v4.0 — BDV分段查表修正版 | IEC Grade 1/2/3 · JIS Grade 0/1/2</div>
+  <div class="ver">v5.0 — 完成外徑最小值公式修正 | BDV分段查表全修正版</div>
 </div>
 
-<!-- 語言切換 -->
 <div class="lang-bar">
   <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中文</button>
   <button class="lang-btn" id="btn-id" onclick="setLang('id')">Bahasa Indonesia</button>
 </div>
 
-<!-- 輸入區 -->
 <div class="card">
   <div class="card-title" id="lbl-title">漆膜厚度標準查詢</div>
   <div class="field">
@@ -522,70 +500,75 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;fo
   <button class="search-btn" onclick="lookup()" ontouchstart="" id="lbl-search">查詢漆膜規範 / Cari Standar Tebal Film</button>
 </div>
 
-<!-- 結果區 -->
 <div class="results" id="results" style="display:none"></div>
 
-<div class="footer" id="lbl-footer">
-  PT. Tongcheng（東誠電線電纜）&nbsp;|&nbsp;IEC 60317-0-1(CU) / 60317-0-3(AL)&nbsp;|&nbsp;JIS C 3202<br>
-  支援線徑 0.45～6.30mm &nbsp;|&nbsp; Mendukung diameter 0.45~6.30mm
+<div class="footer">
+  PT. Tongcheng（東誠電線電纜）| IEC 60317-0-1(CU) / 60317-0-3(AL) | JIS C 3202<br>
+  支援線徑 0.45～6.30mm | Mendukung diameter 0.45~6.30mm
 </div>
 
 <script>
 // ══════════════════════════════════════════════════
-//  語言字典
+// 語言字典
 // ══════════════════════════════════════════════════
-const T = {
+const T={
   zh:{
     title:'漆膜厚度標準查詢',
-    dia:'裸線尺寸', dia_id:'Ukuran kawat telanjang',
-    type:'材質', type_id:'Jenis material',
+    dia:'裸線尺寸',dia_id:'Ukuran kawat telanjang',
+    type:'材質',type_id:'Jenis material',
     search:'查詢漆膜規範 / Cari Standar Tebal Film',
-    // IEC Grade命名 (1=薄, 2=標準★, 3=厚)
-    iec_g1name:'薄型', iec_g2name:'標準 ★', iec_g3name:'厚型',
-    // JIS Grade命名 (0=薄, 1=標準★, 2=厚) ← JIS用0/1/2
-    jis_g0name:'薄型', jis_g1name:'標準 ★', jis_g2name:'厚型',
-    overall_range:'完成外徑範圍', film_side:'皮膜厚（單側）', film_total:'皮膜厚（雙側）', bdv:'最小破壞電壓',
-    iec_std:'IEC 60317 標準', jis_std:'JIS C 3202 標準',
-    jis_diff:'JIS 比 IEC 嚴格',
-    actual_title:'東誠實測 — 軸子 A00082（JIS Grade 1 / IEC Grade 2）',
-    actual_dia:'完成外徑實測', actual_film:'皮膜厚度雙側', actual_bdv:'BDV 軸子82', actual_pin:'針孔（壓扁法）',
-    cu_label:'漆包銅線 CU', al_label:'漆包鋁線 AL',
+    iec_g1name:'薄型',iec_g2name:'標準 ★',iec_g3name:'厚型',
+    jis_g0name:'薄型',jis_g1name:'標準 ★',jis_g2name:'厚型',
+    overall_range:'完成外徑範圍',film_side:'皮膜厚（單側）',film_total:'皮膜厚（雙側）',bdv:'最小破壞電壓',
+    iec_std:'IEC 60317 標準',jis_std:'JIS C 3202 標準',
+    cu_label:'漆包銅線 CU',al_label:'漆包鋁線 AL',
     hint:'JIS 比 IEC 嚴格的幅度 | ★ 最常用等級',
     nodata:'找不到此線徑數據，請確認輸入值在 0.45～6.30mm 範圍內',
-    bdv_twist:'扭絞法',
-    bdv_ball:'鋼珠法',
+    bdv_twist:'扭絞法',bdv_ball:'鋼珠法',
     bdv_warn_title:'⚠ 注意：大線徑 BDV 標準大幅下降',
-    bdv_warn_body:'線徑 > 2.500mm 採用鋼珠法測試，最小 BDV 標準大幅降低（IEC: G1=1300V / G2=2500V / G3=3800V）。請確認測試方法正確。',
+    bdv_warn_iec:'IEC：線徑 > 2.500mm 採鋼珠法，BDV：G1=1,300V / G2=2,500V / G3=3,800V',
+    bdv_warn_jis_cu:'JIS銅線：線徑 > 2.200mm 即改採鋼珠法測試（BDV仍依上表值）',
+    bdv_warn_jis_al:'JIS鋁線：線徑 > 2.200mm 即改採鋼珠法測試（BDV仍依上表值）',
     grade_map_title:'等級對照 IEC ↔ JIS',
-    grade_map_note:'IEC用Grade 1/2/3；JIS用Grade 0/1/2，命名不同但厚度對應',
+    grade_map_note:'IEC用Grade 1/2/3；JIS用Grade 0/1/2，命名不同但對應相同厚度層級',
+    min_od_note_title:'✅ 完成外徑最小值計算方式（依IEC公式）',
+    min_od_note_body:'最小完成外徑 = (裸線標稱直徑 − 導體公差) + 最小皮膜厚度 × 2',
+    min_od_note_ex:'例：AL 2.40 Grade 1 = (2.400−0.025) + 0.021×2 = 2.375 + 0.042 = 2.417 mm',
     test_method:'測試方法',
+    jis_na:'JIS未規定',
+    actual_title:'東誠實測 — 軸子 A00082（JIS Grade 1 / IEC Grade 2）',
+    actual_dia:'完成外徑實測',actual_film:'皮膜厚度雙側',actual_bdv:'BDV 軸子82',actual_pin:'針孔（壓扁法）',
   },
   id:{
     title:'Pencarian Standar Tebal Film',
-    dia:'Ukuran kawat telanjang', dia_id:'Bare wire size',
-    type:'Jenis material', type_id:'Material type',
+    dia:'Ukuran kawat telanjang',dia_id:'Bare wire size',
+    type:'Jenis material',type_id:'Material type',
     search:'Cari Standar / 查詢規範',
-    iec_g1name:'Tipis', iec_g2name:'Standar ★', iec_g3name:'Tebal',
-    jis_g0name:'Tipis', jis_g1name:'Standar ★', jis_g2name:'Tebal',
-    overall_range:'Rentang ukuran akhir', film_side:'Tebal film (per sisi)', film_total:'Tebal film (total)', bdv:'BDV minimum',
-    iec_std:'Standar IEC 60317', jis_std:'Standar JIS C 3202',
-    jis_diff:'JIS lebih ketat dari IEC',
-    actual_title:'Hasil Aktual — Bobbin A00082 (JIS Grade 1 / IEC Grade 2)',
-    actual_dia:'Ukuran akhir aktual', actual_film:'Tebal film total', actual_bdv:'BDV Bobbin 82', actual_pin:'Pinhole (metode flat)',
-    cu_label:'Kawat Enamel Tembaga CU', al_label:'Kawat Enamel Aluminium AL',
+    iec_g1name:'Tipis',iec_g2name:'Standar ★',iec_g3name:'Tebal',
+    jis_g0name:'Tipis',jis_g1name:'Standar ★',jis_g2name:'Tebal',
+    overall_range:'Rentang ukuran akhir',film_side:'Tebal film (per sisi)',film_total:'Tebal film (total)',bdv:'BDV minimum',
+    iec_std:'Standar IEC 60317',jis_std:'Standar JIS C 3202',
+    cu_label:'Kawat Enamel Tembaga CU',al_label:'Kawat Enamel Aluminium AL',
     hint:'JIS lebih ketat dari IEC | ★ Grade yang paling umum',
     nodata:'Data tidak ditemukan. Masukkan diameter 0.45～6.30mm',
-    bdv_twist:'Metode putar',
-    bdv_ball:'Metode bola baja',
-    bdv_warn_title:'⚠ Perhatian: BDV turun drastis untuk kawat besar',
-    bdv_warn_body:'Diameter > 2.500mm menggunakan metode bola baja, BDV minimum turun drastis (IEC: G1=1300V / G2=2500V / G3=3800V). Pastikan metode pengujian yang benar.',
+    bdv_twist:'Metode putar',bdv_ball:'Metode bola baja',
+    bdv_warn_title:'⚠ Perhatian: BDV turun drastis kawat besar',
+    bdv_warn_iec:'IEC: diameter > 2.500mm pakai bola baja, BDV: G1=1,300V / G2=2,500V / G3=3,800V',
+    bdv_warn_jis_cu:'JIS Cu: diameter > 2.200mm ganti ke metode bola baja (BDV tetap sesuai tabel)',
+    bdv_warn_jis_al:'JIS Al: diameter > 2.200mm ganti ke metode bola baja (BDV tetap sesuai tabel)',
     grade_map_title:'Konversi Grade IEC ↔ JIS',
-    grade_map_note:'IEC pakai Grade 1/2/3; JIS pakai Grade 0/1/2, penamaannya berbeda',
+    grade_map_note:'IEC: Grade 1/2/3; JIS: Grade 0/1/2, nama berbeda tapi level sama',
+    min_od_note_title:'✅ Cara hitung ukuran akhir minimum (formula IEC)',
+    min_od_note_body:'Ukuran akhir min = (diameter nominal − toleransi konduktor) + tebal film min × 2',
+    min_od_note_ex:'Contoh: AL 2.40 Grade 1 = (2.400−0.025) + 0.021×2 = 2.375 + 0.042 = 2.417 mm',
     test_method:'Metode uji',
+    jis_na:'Tidak diatur JIS',
+    actual_title:'Hasil Aktual — Bobbin A00082 (JIS Grade 1 / IEC Grade 2)',
+    actual_dia:'Ukuran akhir aktual',actual_film:'Tebal film total',actual_bdv:'BDV Bobbin 82',actual_pin:'Pinhole (metode flat)',
   }
 };
 
-let lang='zh', metal='CU';
+let lang='zh',metal='CU';
 
 function setLang(l){
   lang=l;
@@ -597,7 +580,7 @@ function setLang(l){
   document.getElementById('lbl-type').childNodes[0].textContent=t.type+' ';
   document.getElementById('lbl-type-id').textContent=t.type_id;
   document.getElementById('lbl-search').textContent=t.search;
-  if(document.getElementById('results').style.display!=='none') lookup();
+  if(document.getElementById('results').style.display!=='none')lookup();
 }
 
 function setMetal(m){
@@ -607,93 +590,129 @@ function setMetal(m){
 }
 
 // ══════════════════════════════════════════════════
-//  BDV 分段查表函數（依線徑返回正確BDV）
-//  修正重點：>2.5mm 鋼珠法數值大幅下降
+// 導體公差表（來自IEC文件，銅線鋁線相同）
 // ══════════════════════════════════════════════════
-function getBDV(d, metalType, std){
-  // IEC BDV（銅線與鋁線相同）
-  if(std==='iec'){
-    if(d<=0.450)      return {g1:2300,g2:4400,g3:6800,method:'twist'};
-    if(d<=0.500)      return {g1:2400,g2:4600,g3:7000,method:'twist'};
-    if(d<=0.560)      return {g1:2500,g2:4600,g3:7100,method:'twist'};
-    if(d<=0.630)      return {g1:2600,g2:4800,g3:7100,method:'twist'};
-    if(d<=0.710)      return {g1:2600,g2:4800,g3:7200,method:'twist'};
-    if(d<=0.800)      return {g1:2600,g2:4900,g3:7400,method:'twist'};
-    if(d<=2.500)      return {g1:2700,g2:5000,g3:7600,method:'twist'};
-    /* >2.500mm 鋼珠法，BDV大幅下降 */
-    return             {g1:1300,g2:2500,g3:3800,method:'ball'};
-  }
-  // JIS BDV（Grade 0=薄/Grade 1=標準，Grade 2少用故與G1相同顯示）
-  // 銅線
-  if(std==='jis' && metalType==='CU'){
-    if(d<=0.750)      return {g0:3000,g1:2000,g2:null,method:'twist'};
-    if(d<=1.300)      return {g0:3600,g1:2400,g2:null,method:'twist'};
-    if(d<=2.100)      return {g0:4600,g1:3200,g2:null,method:'twist'};
-    if(d<=2.500)      return {g0:5400,g1:3700,g2:null,method:'twist'};
-    /* >2.500mm 鋼珠法 */
-    return             {g0:2500,g1:2500,g2:null,method:'ball'};
-  }
-  // 鋁線
-  if(std==='jis' && metalType==='AL'){
-    if(d<=0.750)      return {g0:3000,g1:2000,g2:null,method:'twist'};
-    if(d<=1.300)      return {g0:3600,g1:2400,g2:null,method:'twist'};
-    if(d<=2.100)      return {g0:4600,g1:3200,g2:null,method:'twist'};
-    if(d<=2.200)      return {g0:5400,g1:3700,g2:null,method:'twist'};
-    /* ≥2.300mm 鋼珠法 */
-    return             {g0:2500,g1:2500,g2:null,method:'ball'};
-  }
-  return {g1:2700,g2:5000,g3:7600,method:'twist'};
+const TOL={
+  0.45:0.005,0.50:0.005,0.55:0.006,0.60:0.006,
+  0.65:0.007,0.70:0.007,0.75:0.007,0.80:0.008,
+  0.85:0.009,0.90:0.009,0.95:0.010,1.00:0.010,
+  1.05:0.011,1.10:0.011,1.15:0.013,1.20:0.013,
+  1.25:0.013,1.30:0.014,1.35:0.014,1.40:0.014,
+  1.45:0.016,1.50:0.016,1.55:0.016,1.60:0.016,
+  1.65:0.018,1.70:0.018,1.75:0.018,1.80:0.018,
+  1.85:0.020,1.90:0.020,1.95:0.020,2.00:0.020,
+  2.10:0.022,2.20:0.022,2.30:0.025,2.40:0.025,
+  2.50:0.025,2.60:0.028,2.70:0.028,2.80:0.028,
+  2.90:0.032,3.00:0.032,3.15:0.032,3.20:0.036,
+  3.30:0.036,3.40:0.036,3.50:0.036,3.55:0.036,
+  3.60:0.040,3.70:0.040,3.80:0.040,3.90:0.040,
+  4.00:0.040,4.50:0.045,5.00:0.050,5.30:0.050,
+  5.60:0.050,6.00:0.050,6.30:0.050
+};
+
+function getTol(nom){
+  // 查表，找最接近的
+  const key=Object.keys(TOL).map(Number).reduce((a,b)=>Math.abs(b-nom)<Math.abs(a-nom)?b:a);
+  return TOL[key];
 }
 
 // ══════════════════════════════════════════════════
-//  格式化工具
+// BDV 分段查表
+// 修正重點：
+//   IEC：>2.500mm 切換鋼珠法，BDV大幅下降
+//   JIS：>2.200mm 切換鋼珠法（截圖注記），但BDV仍用表格值
 // ══════════════════════════════════════════════════
+function getBDV(d,metalType,std){
+  if(std==='iec'){
+    // IEC銅線與鋁線BDV規定相同（截圖2=截圖3）
+    if(d<=0.450) return{g1:2300,g2:4400,g3:6800,method:'twist'};
+    if(d<=0.500) return{g1:2400,g2:4600,g3:7000,method:'twist'};
+    if(d<=0.560) return{g1:2500,g2:4600,g3:7100,method:'twist'};
+    if(d<=0.630) return{g1:2600,g2:4800,g3:7100,method:'twist'};
+    if(d<=0.710) return{g1:2600,g2:4800,g3:7200,method:'twist'};
+    if(d<=0.800) return{g1:2600,g2:4900,g3:7400,method:'twist'};
+    if(d<=2.500) return{g1:2700,g2:5000,g3:7600,method:'twist'};
+    // >2.500mm 鋼珠法，BDV大幅下降（來自IEC-AL截圖完整表格）
+    return{g1:1300,g2:2500,g3:3800,method:'ball'};
+  }
+
+  // JIS BDV
+  // ★ 測試方法切換點：
+  //   截圖注記「≤2.2mm 兩線扭絞法 / >2.2mm 鋼珠法」
+  //   但BDV數值仍依表格（表格只到2.50mm）
+  if(std==='jis'&&metalType==='CU'){
+    let method=d<=2.2?'twist':'ball';
+    if(d<=0.750) return{g0:3000,g1:2000,g2:null,method};
+    if(d<=1.300) return{g0:3600,g1:2400,g2:null,method};
+    if(d<=2.100) return{g0:4600,g1:3200,g2:null,method};
+    if(d<=2.500) return{g0:5400,g1:3700,g2:null,method};
+    // >2.500mm：JIS表格無此線徑BDV規定
+    return{g0:null,g1:null,g2:null,method:'ball'};
+  }
+  if(std==='jis'&&metalType==='AL'){
+    // JIS-AL測試方法切換點與CU相同（>2.2mm鋼珠）
+    let method=d<=2.2?'twist':'ball';
+    if(d<=0.750) return{g0:3000,g1:2000,g2:null,method};
+    if(d<=1.300) return{g0:3600,g1:2400,g2:null,method};
+    if(d<=2.100) return{g0:4600,g1:3200,g2:null,method};
+    if(d<=2.200) return{g0:5400,g1:3700,g2:null,method};
+    if(d<=2.500) return{g0:5400,g1:3700,g2:null,method:'ball'};
+    return{g0:null,g1:null,g2:null,method:'ball'};
+  }
+  return{g1:2700,g2:5000,g3:7600,method:'twist'};
+}
+
 function f(v){return v.toFixed(3);}
+
 function methodTag(method){
   const t=T[lang];
-  if(method==='ball') return `<span class="method-tag method-ball">🔴 ${t.bdv_ball}</span>`;
-  return `<span class="method-tag method-twist">🔵 ${t.bdv_twist}</span>`;
+  if(method==='ball')return`<span class="method-tag method-ball">🔴 ${t.bdv_ball}</span>`;
+  return`<span class="method-tag method-twist">🔵 ${t.bdv_twist}</span>`;
 }
 
 // ══════════════════════════════════════════════════
-//  等級卡片 HTML 生成
-//  gn = IEC Grade號碼 (1/2/3)
-//  jisGn = JIS Grade號碼 (0/1/2) ← 比IEC少1
+// 等級卡片 HTML 生成
+// 修正重點：最小完成外徑 = (標稱-公差) + 最小皮膜×2
 // ══════════════════════════════════════════════════
-function gcHTML(gn, iec_g, jis_g, nom, iec_bdv, jis_bdv, isBig){
+function gcHTML(gn,iec_maxOD,jis_maxOD,iec_filmMin,jis_filmMin,nom,tol,iec_bdv,jis_bdv){
   const t=T[lang];
-  const jisGn=gn-1; // IEC Grade 1→JIS Grade 0, Grade 2→Grade 1, Grade 3→Grade 2
+  const jisGn=gn-1;// IEC Grade 1→JIS Grade 0, 2→1, 3→2
 
-  const iec_fmin=(iec_g[0]-nom)/2, iec_fmax=(iec_g[1]-nom)/2;
-  const jis_fmin=(jis_g[0]-nom)/2, jis_fmax=(jis_g[1]-nom)/2;
-  const diff=(jis_fmin-iec_fmin);
+  // ★ 正確公式：最小完成外徑 = (標稱直徑 - 導體公差) + 最小皮膜×2
+  const bareMin=nom-tol;
+  const iec_minOD=bareMin+iec_filmMin*2;
+  const jis_minOD=bareMin+jis_filmMin*2;
+
+  // 皮膜厚度（單側）：最小值=最小皮膜，最大值反推自最大完成外徑
+  const bareMax=nom+tol;
+  const iec_filmMax=(iec_maxOD-bareMax)/2;
+  const jis_filmMax=(jis_maxOD-bareMax)/2;
+
+  const diff=jis_filmMin-iec_filmMin;
   const dTag=diff>0.0001?`<span class="diff-tag d-more">JIS+${(diff*2).toFixed(3)}</span>`:`<span class="diff-tag d-same">=</span>`;
 
-  // IEC BDV
-  const iec_bdv_val = gn===1?iec_bdv.g1 : gn===2?iec_bdv.g2 : iec_bdv.g3;
-  // JIS BDV (Grade 0/1/2)
-  const jis_bdv_val = jisGn===0?jis_bdv.g0 : jisGn===1?jis_bdv.g1 : jis_bdv.g2;
+  // IEC BDV值
+  const iec_bdv_val=gn===1?iec_bdv.g1:gn===2?iec_bdv.g2:iec_bdv.g3;
+  // JIS BDV值（Grade 0/1/2對應jisGn）
+  const jis_bdv_val=jisGn===0?jis_bdv.g0:jisGn===1?jis_bdv.g1:jis_bdv.g2;
 
-  const iecBdvDiff = (jis_bdv_val!=null && jis_bdv_val>iec_bdv_val)?
+  const iecBdvDiff=(jis_bdv_val!=null&&jis_bdv_val>iec_bdv_val)?
     `<span class="diff-tag d-more">JIS+${jis_bdv_val-iec_bdv_val}V</span>`:
     (jis_bdv_val!=null?`<span class="diff-tag d-same">=</span>`:'');
 
-  // IEC Grade名稱
   const iecNames=['','薄型','標準 ★','厚型'];
   const iecNamesId=['','Tipis','Standar ★','Tebal'];
   const iecName=lang==='zh'?iecNames[gn]:iecNamesId[gn];
-
-  // JIS Grade名稱
   const jisLabel=`JIS Grade ${jisGn}`;
 
-  // BDV顏色：鋼珠法時紅色提示
-  const bdvColorIEC=isBig?'c-red':'c-blue';
-  const bdvColorJIS=isBig?'c-red':'c-purple';
+  const bdvColorIEC=iec_bdv.method==='ball'?'c-red':'c-blue';
+  const bdvColorJIS=jis_bdv.method==='ball'?'c-red':'c-purple';
 
-  const jisNote = jis_bdv_val===null ? '<span style="color:var(--text3);font-size:11px">—</span>' :
-    `${jis_bdv_val.toLocaleString()} V`;
+  const jisBdvDisplay=jis_bdv_val!=null?
+    `${jis_bdv_val.toLocaleString()} V`:
+    `<span class="c-gray">${t.jis_na}</span>`;
 
-  return `<div class="gc g${gn}">
+  return`<div class="gc g${gn}">
     <div class="gc-head">
       <div class="gc-head-left">
         <span class="gc-num">IEC Grade ${gn}</span>
@@ -702,25 +721,23 @@ function gcHTML(gn, iec_g, jis_g, nom, iec_bdv, jis_bdv, isBig){
       </div>
     </div>
     <div class="gc-body">
-      <!-- IEC -->
       <div class="std-block">
         <div class="std-label"><span class="badge iec-badge">IEC 60317</span>${t.iec_std}</div>
         <div class="row2">
-          <div class="kv"><div class="k">${t.overall_range}</div><div class="v c-blue">${f(iec_g[0])} ~ ${f(iec_g[1])} mm</div></div>
-          <div class="kv"><div class="k">${t.film_side}</div><div class="v c-green">${f(iec_fmin)} ~ ${f(iec_fmax)} mm</div></div>
-          <div class="kv"><div class="k">${t.film_total}</div><div class="v c-green">${f(iec_fmin*2)} ~ ${f(iec_fmax*2)} mm</div></div>
+          <div class="kv"><div class="k">${t.overall_range}</div><div class="v c-blue">${f(iec_minOD)} ~ ${f(iec_maxOD)} mm</div></div>
+          <div class="kv"><div class="k">${t.film_side}</div><div class="v c-green">≥ ${f(iec_filmMin)} mm</div></div>
+          <div class="kv"><div class="k">${t.film_total}</div><div class="v c-green">≥ ${f(iec_filmMin*2)} mm</div></div>
           <div class="kv"><div class="k">${t.bdv} ${methodTag(iec_bdv.method)}</div><div class="v ${bdvColorIEC}">${iec_bdv_val.toLocaleString()} V</div></div>
         </div>
       </div>
       <div class="divider"></div>
-      <!-- JIS -->
       <div class="std-block">
         <div class="std-label"><span class="badge jis-badge">JIS C 3202</span>${t.jis_std} ${dTag}</div>
         <div class="row2">
-          <div class="kv"><div class="k">${t.overall_range}</div><div class="v c-amber">${f(jis_g[0])} ~ ${f(jis_g[1])} mm</div></div>
-          <div class="kv"><div class="k">${t.film_side}</div><div class="v c-amber">${f(jis_fmin)} ~ ${f(jis_fmax)} mm</div></div>
-          <div class="kv"><div class="k">${t.film_total}</div><div class="v c-amber">${f(jis_fmin*2)} ~ ${f(jis_fmax*2)} mm</div></div>
-          <div class="kv"><div class="k">${t.bdv} ${methodTag(jis_bdv.method)} ${iecBdvDiff}</div><div class="v ${bdvColorJIS}">${jisNote}</div></div>
+          <div class="kv"><div class="k">${t.overall_range}</div><div class="v c-amber">${f(jis_minOD)} ~ ${f(jis_maxOD)} mm</div></div>
+          <div class="kv"><div class="k">${t.film_side}</div><div class="v c-amber">≥ ${f(jis_filmMin)} mm</div></div>
+          <div class="kv"><div class="k">${t.film_total}</div><div class="v c-amber">≥ ${f(jis_filmMin*2)} mm</div></div>
+          <div class="kv"><div class="k">${t.bdv} ${methodTag(jis_bdv.method)} ${iecBdvDiff}</div><div class="v ${bdvColorJIS}">${jisBdvDisplay}</div></div>
         </div>
       </div>
     </div>
@@ -728,36 +745,44 @@ function gcHTML(gn, iec_g, jis_g, nom, iec_bdv, jis_bdv, isBig){
 }
 
 // ══════════════════════════════════════════════════
-//  主查詢函數
+// 主查詢函數
 // ══════════════════════════════════════════════════
 function lookup(){
   const d=parseFloat(document.getElementById('dia').value);
   const el=document.getElementById('results');
   const t=T[lang];
-
   if(isNaN(d)||d<0.1||d>6.3){
     el.innerHTML=`<div class="no-data">${t.nodata}</div>`;
-    el.style.display='block'; return;
+    el.style.display='block';return;
   }
-
   const iecRow=findRow(IEC,d);
   const jisDB=metal==='AL'?JIS_AL:JIS_CU;
   const jisRow=findRow(jisDB,d);
   if(!iecRow||!jisRow){el.innerHTML=`<div class="no-data">${t.nodata}</div>`;el.style.display='block';return;}
 
   const nom=iecRow[0];
-  const isBig=nom>2.5; // >2.5mm 使用鋼珠法，BDV大幅下降
+  const tol=getTol(nom);
 
-  // IEC數據索引：CU用1-3，AL用4-6
+  // IEC數據：[nom,[CU-G1min,max],[CU-G2min,max],[CU-G3min,max],[AL-G1min,max],[AL-G2min,max],[AL-G3min,max]]
   const off=metal==='AL'?4:1;
-  const iec_gs=[null,iecRow[off],iecRow[off+1],iecRow[off+2]];
+  // IEC資料表中的[min,max]，min欄位是舊版舊值，我們只取max；min用公式動態算
+  const iec_g1_maxOD=iecRow[off][1], iec_g2_maxOD=iecRow[off+1][1], iec_g3_maxOD=iecRow[off+2][1];
 
-  // JIS數據：索引1=Grade 0(薄), 2=Grade 1(標), 3=Grade 2(厚)
-  const jis_gs=[null,jisRow[1],jisRow[2],jisRow[3]];
+  // 最小皮膜厚度（單側）從原始文件提取
+  // IEC：filmMin = (iec_row[off][0] - nom) / 2 ← 舊版有誤，改為查最小皮膜表
+  // 直接用最大完成外徑，最小皮膜從FILM_IEC查表
+  const iec_fm=getFilmMin(nom,metal,'iec');
+  const jis_fm=getFilmMin(nom,metal,'jis');
 
-  // 取得正確BDV
+  // JIS資料表：[nom,[G0min,max],[G1min,max],[G2min,max]]，同樣只取max
+  const jis_g0_maxOD=jisRow[1][1], jis_g1_maxOD=jisRow[2][1], jis_g2_maxOD=jisRow[3][1];
+
   const iec_bdv=getBDV(nom,metal,'iec');
   const jis_bdv=getBDV(nom,metal,'jis');
+
+  const iecBig=nom>2.500;
+  const jisBig=nom>2.200;
+  const anyBig=iecBig||jisBig;
 
   const mClass=metal==='AL'?'al':'cu';
   const mLabel=metal==='AL'?t.al_label:t.cu_label;
@@ -766,49 +791,43 @@ function lookup(){
   // 等級對照表
   const gradeMapHTML=`<div class="grade-map">
     <div class="grade-map-title">${t.grade_map_title}</div>
-    <div class="grade-map-row">
-      <span class="gm-iec">IEC Grade 1</span>
-      <span class="gm-arrow">↔</span>
-      <span class="gm-jis">JIS Grade 0</span>
-      <span class="gm-desc">薄型 / Tipis</span>
-    </div>
-    <div class="grade-map-row">
-      <span class="gm-iec">IEC Grade 2</span>
-      <span class="gm-arrow">↔</span>
-      <span class="gm-jis">JIS Grade 1</span>
-      <span class="gm-desc">標準 ★ / Standar</span>
-    </div>
-    <div class="grade-map-row">
-      <span class="gm-iec">IEC Grade 3</span>
-      <span class="gm-arrow">↔</span>
-      <span class="gm-jis">JIS Grade 2</span>
-      <span class="gm-desc">厚型 / Tebal</span>
-    </div>
+    <div class="grade-map-row"><span class="gm-iec">IEC Grade 1</span><span class="gm-arrow">↔</span><span class="gm-jis">JIS Grade 0</span><span class="gm-desc">薄型 / Tipis</span></div>
+    <div class="grade-map-row"><span class="gm-iec">IEC Grade 2</span><span class="gm-arrow">↔</span><span class="gm-jis">JIS Grade 1</span><span class="gm-desc">標準 ★ / Standar</span></div>
+    <div class="grade-map-row"><span class="gm-iec">IEC Grade 3</span><span class="gm-arrow">↔</span><span class="gm-jis">JIS Grade 2</span><span class="gm-desc">厚型 / Tebal</span></div>
     <div style="font-size:10px;color:var(--text3);margin-top:5px">${t.grade_map_note}</div>
   </div>`;
 
+  // 最小完成外徑說明
+  const bareMin=(nom-tol).toFixed(3);
+  const minODNoteHTML=`<div class="min-od-note">
+    <strong>${t.min_od_note_title}</strong><br>
+    ${t.min_od_note_body}<br>
+    <span style="color:#1B5E20">${t.min_od_note_ex.replace('2.400',nom.toFixed(3)).replace('0.025',tol.toFixed(3)).replace('2.375',bareMin)}</span>
+  </div>`;
+
   // 大線徑警告
-  const bigWarnHTML=isBig?`<div class="bdv-warn-banner">
+  let warnLines=[];
+  if(iecBig) warnLines.push(t.bdv_warn_iec);
+  if(jisBig) warnLines.push(metal==='AL'?t.bdv_warn_jis_al:t.bdv_warn_jis_cu);
+  const bigWarnHTML=anyBig?`<div class="bdv-warn-banner">
     <div class="icon">⚠️</div>
-    <div class="txt"><strong>${t.bdv_warn_title}</strong><br>${t.bdv_warn_body}</div>
+    <div class="txt"><strong>${t.bdv_warn_title}</strong><br>${warnLines.join('<br>')}</div>
   </div>`:'';
 
   let html=`<div class="metal-tag ${mClass}">${mLabel} &nbsp; ${nom.toFixed(3)} mm</div>
-  <div class="std-note">${stdRef}</div>
-  ${gradeMapHTML}
-  ${bigWarnHTML}
-  ${gcHTML(1,iec_gs[1],jis_gs[1],nom,iec_bdv,jis_bdv,isBig)}
-  ${gcHTML(2,iec_gs[2],jis_gs[2],nom,iec_bdv,jis_bdv,isBig)}
-  ${gcHTML(3,iec_gs[3],jis_gs[3],nom,iec_bdv,jis_bdv,isBig)}`;
+  <div class="std-note">${stdRef} | 導體公差 ±${tol} mm</div>
+  ${gradeMapHTML}${minODNoteHTML}${bigWarnHTML}
+  ${gcHTML(1,iec_g1_maxOD,jis_g0_maxOD,iec_fm.g1,jis_fm.g0,nom,tol,iec_bdv,jis_bdv)}
+  ${gcHTML(2,iec_g2_maxOD,jis_g1_maxOD,iec_fm.g2,jis_fm.g1,nom,tol,iec_bdv,jis_bdv)}
+  ${gcHTML(3,iec_g3_maxOD,jis_g2_maxOD,iec_fm.g3,jis_fm.g2,nom,tol,iec_bdv,jis_bdv)}`;
 
-  // 實測資料框（僅2.40mm AL）
   if(metal==='AL'&&Math.abs(d-2.4)<0.01){
     html+=`<div class="actual-box">
       <div class="actual-title">${t.actual_title}</div>
-      <div class="arow"><span class="al">${t.actual_dia}</span><span class="av pass">2.486mm ✓ (2.454~2.518)</span></div>
-      <div class="arow"><span class="al">${t.actual_film}</span><span class="av pass">0.080mm ✓ (IEC min 0.079)</span></div>
-      <div class="arow"><span class="al">${t.actual_bdv}</span><span class="av warn">5056V ⚠ IEC OK / JIS NG(5400V)</span></div>
-      <div class="arow"><span class="al">${t.actual_pin}</span><span class="av pass">2 titik ✓ (B&amp;D ≤8)</span></div>
+      <div class="arow"><span class="al">${t.actual_dia}</span><span class="av pass">2.486mm ✓ (2.417~2.518)</span></div>
+      <div class="arow"><span class="al">${t.actual_film}</span><span class="av pass">0.080mm ✓ (IEC min 0.042)</span></div>
+      <div class="arow"><span class="al">${t.actual_bdv}</span><span class="av warn">5056V ⚠ IEC OK(≥5000) / JIS NG(≥5400)</span></div>
+      <div class="arow"><span class="al">${t.actual_pin}</span><span class="av pass">2 titik ✓ (≤3 Grade1)</span></div>
     </div>`;
   }
 
@@ -828,10 +847,160 @@ function findRow(db,d){
 }
 
 // ══════════════════════════════════════════════════
-//  IEC 數據表
-//  格式: [nominal, [CU-G1-min,max],[CU-G2-min,max],[CU-G3-min,max],
-//                 [AL-G1-min,max],[AL-G2-min,max],[AL-G3-min,max]]
-//  IEC Grade 1=薄, Grade 2=標準, Grade 3=厚
+// 最小皮膜厚度查表（單側，來自IEC/JIS文件）
+// ══════════════════════════════════════════════════
+function getFilmMin(nom,metalType,std){
+  // 以最接近的IEC表行回傳最小皮膜
+  if(std==='iec'){
+    const row=findRow(IEC,nom);
+    if(!row)return{g1:0.020,g2:0.037,g3:0.059};
+    const off=metalType==='AL'?4:1;
+    // 最小皮膜 = (最小完成外徑_舊表值 - 標稱) / 2
+    // 但舊表值有誤，改從最大完成外徑反推：
+    // 正確做法：單側最小皮膜已存在於各標準表，這裡直接計算
+    // IEC表格格式 [nom,[g1min,g1max],[g2min,g2max],[g3min,g3max],...]
+    // g_min是舊版計算值，有偏差；正確的最小皮膜應從文件數值取
+    // 使用最大完成外徑和導體最大值反推「最大允許皮膜」不是最小值
+    // 最小皮膜從原始文件直接取（存在IEC_FILM表）
+    return getFilmFromTable(nom,metalType,'iec');
+  }
+  return getFilmFromTable(nom,metalType,'jis');
+}
+
+// 最小皮膜厚度表（直接從IEC/JIS文件讀取，單側mm）
+// 格式：[標稱, CU-G1, CU-G2, CU-G3, AL-G1, AL-G2, AL-G3]
+const FILM_IEC=[
+[0.45,0.011,0.021,0.032,0.011,0.021,0.032],
+[0.50,0.012,0.0225,0.0335,0.012,0.0225,0.0335],
+[0.55,0.0125,0.0235,0.0355,0.0125,0.0235,0.0355],
+[0.60,0.0135,0.025,0.0375,0.0135,0.025,0.0375],
+[0.65,0.014,0.0265,0.040,0.014,0.0265,0.040],
+[0.70,0.014,0.0265,0.040,0.014,0.0265,0.040],
+[0.75,0.014,0.0265,0.040,0.014,0.0265,0.040],
+[0.80,0.015,0.028,0.0425,0.015,0.028,0.0425],
+[0.85,0.016,0.030,0.045,0.016,0.030,0.045],
+[0.90,0.016,0.030,0.045,0.016,0.030,0.045],
+[0.95,0.017,0.0315,0.0475,0.017,0.0315,0.0475],
+[1.00,0.017,0.0315,0.0475,0.017,0.0315,0.0475],
+[1.05,0.017,0.0325,0.049,0.017,0.0325,0.049],
+[1.10,0.017,0.0325,0.049,0.017,0.0325,0.049],
+[1.15,0.0175,0.0335,0.050,0.0175,0.0335,0.050],
+[1.20,0.0175,0.0335,0.050,0.0175,0.0335,0.050],
+[1.25,0.0175,0.0335,0.050,0.0175,0.0335,0.050],
+[1.30,0.018,0.0345,0.0515,0.018,0.0345,0.0515],
+[1.35,0.018,0.0345,0.0515,0.018,0.0345,0.0515],
+[1.40,0.018,0.0345,0.0515,0.018,0.0345,0.0515],
+[1.45,0.019,0.0355,0.0535,0.019,0.0355,0.0535],
+[1.50,0.019,0.0355,0.0535,0.019,0.0355,0.0535],
+[1.55,0.019,0.0355,0.0535,0.019,0.0355,0.0535],
+[1.60,0.019,0.0355,0.0535,0.019,0.0355,0.0535],
+[1.65,0.0195,0.0365,0.055,0.0195,0.0365,0.055],
+[1.70,0.0195,0.0365,0.055,0.0195,0.0365,0.055],
+[1.75,0.0195,0.0365,0.055,0.0195,0.0365,0.055],
+[1.80,0.0195,0.0365,0.055,0.0195,0.0365,0.055],
+[1.85,0.020,0.0375,0.0565,0.020,0.0375,0.0565],
+[1.90,0.020,0.0375,0.0565,0.020,0.0375,0.0565],
+[1.95,0.020,0.0375,0.0565,0.020,0.0375,0.0565],
+[2.00,0.020,0.0375,0.0565,0.020,0.0375,0.0565],
+[2.10,0.0205,0.0385,0.058,0.0205,0.0385,0.058],
+[2.20,0.0205,0.0385,0.058,0.0205,0.0385,0.058],
+[2.30,0.021,0.0395,0.0595,0.021,0.0395,0.0595],
+[2.40,0.021,0.0395,0.0595,0.021,0.0395,0.0595],
+[2.50,0.021,0.0395,0.0595,0.021,0.0395,0.0595],
+[2.60,0.0215,0.0405,0.0615,0.0215,0.0405,0.0615],
+[2.70,0.0215,0.0405,0.0615,0.0215,0.0405,0.0615],
+[2.80,0.0215,0.0405,0.0615,0.0215,0.0405,0.0615],
+[2.90,0.0225,0.042,0.0635,0.0225,0.042,0.0635],
+[3.00,0.0225,0.042,0.0635,0.0225,0.042,0.0635],
+[3.15,0.0225,0.042,0.0635,0.0225,0.042,0.0635],
+[3.20,0.023,0.043,0.065,0.023,0.043,0.065],
+[3.30,0.023,0.043,0.065,0.023,0.043,0.065],
+[3.40,0.023,0.043,0.065,0.023,0.043,0.065],
+[3.50,0.023,0.043,0.065,0.023,0.043,0.065],
+[3.55,0.023,0.043,0.065,0.023,0.043,0.065],
+[3.60,0.0235,0.0445,0.067,0.0235,0.0445,0.067],
+[3.70,0.0235,0.0445,0.067,0.0235,0.0445,0.067],
+[3.80,0.0235,0.0445,0.067,0.0235,0.0445,0.067],
+[3.90,0.0235,0.0445,0.067,0.0235,0.0445,0.067],
+[4.00,0.0235,0.0445,0.067,0.0235,0.0445,0.067],
+[4.50,0.0245,0.046,0.069,0.0245,0.046,0.069],
+[5.00,0.025,0.047,0.071,0.025,0.047,0.071],
+[5.30,0.025,0.047,0.071,0.025,0.047,0.071],
+[5.60,0.025,0.047,0.071,0.025,0.047,0.071],
+[6.00,0.025,0.047,0.071,0.025,0.047,0.071],
+[6.30,0.025,0.047,0.071,0.025,0.047,0.071],
+];
+
+// JIS最小皮膜厚度表（單側mm）
+// 格式：[標稱, CU-G0, CU-G1, CU-G2, AL-G0, AL-G1, AL-G2]
+// JIS Grade 0=薄(對應IEC G1)，Grade 1=標準(對應IEC G2)，Grade 2=厚(對應IEC G3)
+const FILM_JIS=[
+[0.45,0.008,0.018,0.023,0.009,0.014,0.019],
+[0.50,0.0085,0.017,0.033,0.025,0.017,0.018],
+[0.55,0.0085,0.018,0.019,0.025,0.018,0.0195],
+[0.60,0.026,0.019,0.0205,0.026,0.019,0.021],
+[0.65,0.027,0.020,0.0215,0.027,0.020,0.0225],
+[0.70,0.028,0.021,0.0235,0.028,0.0155,0.024],
+[0.75,0.030,0.022,0.025,0.030,0.016,0.025],
+[0.80,0.031,0.0235,0.02625,0.031,0.0205,0.0265],
+[0.85,0.032,0.0245,0.028,0.032,0.021,0.028],
+[0.90,0.033,0.026,0.033,0.033,0.0225,0.0295],
+[0.95,0.034,0.027,0.034,0.034,0.0235,0.031],
+[1.00,0.036,0.028,0.036,0.036,0.025,0.0325],
+[1.05,0.037,0.029,0.037,0.037,0.026,0.0335],
+[1.10,0.037,0.030,0.037,0.037,0.026,0.0335],
+[1.15,0.037,0.030,0.037,0.037,0.026,0.0335],
+[1.20,0.037,0.030,0.037,0.037,0.026,0.0335],
+[1.25,0.039,0.031,0.0395,0.039,0.027,0.0345],
+[1.30,0.039,0.031,0.0395,0.039,0.027,0.0345],
+[1.35,0.039,0.031,0.0395,0.039,0.027,0.0345],
+[1.40,0.039,0.031,0.0395,0.039,0.027,0.0345],
+[1.45,0.041,0.032,0.038,0.041,0.028,0.0355],
+[1.50,0.041,0.032,0.038,0.041,0.028,0.0355],
+[1.55,0.041,0.032,0.038,0.041,0.028,0.0355],
+[1.60,0.041,0.032,0.038,0.041,0.028,0.0355],
+[1.65,0.042,0.033,0.038,0.042,0.029,0.0375],
+[1.70,0.042,0.033,0.038,0.042,0.029,0.0375],
+[1.75,0.042,0.033,0.038,0.042,0.029,0.0375],
+[1.80,0.042,0.033,0.038,0.042,0.029,0.0375],
+[1.85,0.044,0.034,0.0405,0.044,0.030,0.0385],
+[1.90,0.044,0.034,0.0405,0.044,0.030,0.0385],
+[1.95,0.044,0.034,0.0405,0.044,0.030,0.0385],
+[2.00,0.044,0.034,0.0405,0.044,0.030,0.0385],
+[2.05,0.045,0.035,0.042,0.045,0.031,0.040],
+[2.10,0.045,0.035,0.042,0.045,0.031,0.040],
+[2.20,0.046,0.036,0.043,0.046,0.032,0.0415],
+[2.24,0.046,0.036,0.043,0.046,0.032,0.0415],
+[2.30,0.046,0.036,0.043,0.046,0.032,0.0415],
+[2.40,0.048,0.037,0.045,0.020,0.028,0.045],
+[2.50,0.049,0.038,0.046,0.034,0.034,0.0485],
+[2.60,0.049,0.038,0.046,0.034,0.034,0.0485],
+[2.70,0.049,0.038,0.046,0.034,0.034,0.0485],
+[2.80,0.049,0.038,0.046,0.034,0.034,0.0485],
+[2.90,0.049,0.038,0.046,0.034,0.034,0.0485],
+[3.00,0.049,0.038,0.046,0.034,0.034,0.0485],
+[3.10,0.049,0.038,0.046,0.034,0.034,0.0485],
+[3.20,0.049,0.038,0.046,0.034,0.034,0.0485],
+];
+
+function getFilmFromTable(nom,metalType,std){
+  if(std==='iec'){
+    const row=findRow(FILM_IEC,nom);
+    if(!row)return{g1:0.020,g2:0.037,g3:0.059};
+    const off=metalType==='AL'?4:1;
+    return{g1:row[off],g2:row[off+1],g3:row[off+2]};
+  }else{
+    const row=findRow(FILM_JIS,nom);
+    if(!row)return{g0:0.025,g1:0.034,g2:0.043};
+    const off=metalType==='AL'?4:1;
+    return{g0:row[off],g1:row[off+1],g2:row[off+2]};
+  }
+}
+
+// ══════════════════════════════════════════════════
+// IEC 完成外徑數據表（只保留最大完成外徑）
+// 格式: [nominal, [CU-G1-min,max],[CU-G2-min,max],[CU-G3-min,max],
+//                [AL-G1-min,max],[AL-G2-min,max],[AL-G3-min,max]]
 // ══════════════════════════════════════════════════
 const IEC=[
 [0.45,[0.464,0.484],[0.479,0.503],[0.494,0.522],[0.461,0.481],[0.471,0.495],[0.481,0.509]],
@@ -895,11 +1064,7 @@ const IEC=[
 [6.30,[6.438,6.652],[6.649,6.875],[6.832,7.074],[6.407,6.511],[6.465,6.595],[6.551,6.685]],
 ];
 
-// ══════════════════════════════════════════════════
-//  JIS 鋁線數據表
-//  格式: [nominal, [G0-min,max],[G1-min,max],[G2-min,max]]
-//  JIS Grade 0=薄, Grade 1=標準★, Grade 2=厚
-// ══════════════════════════════════════════════════
+// JIS鋁線最大完成外徑表
 const JIS_AL=[
 [0.45,[0.463,0.483],[0.473,0.497],[0.483,0.511]],
 [0.50,[0.514,0.536],[0.524,0.550],[0.536,0.564]],
@@ -962,11 +1127,7 @@ const JIS_AL=[
 [6.30,[6.409,6.513],[6.467,6.597],[6.553,6.687]],
 ];
 
-// ══════════════════════════════════════════════════
-//  JIS 銅線數據表
-//  格式: [nominal, [G0-min,max],[G1-min,max],[G2-min,max]]
-//  JIS Grade 0=薄, Grade 1=標準★, Grade 2=厚
-// ══════════════════════════════════════════════════
+// JIS銅線最大完成外徑表
 const JIS_CU=[
 [0.45,[0.466,0.486],[0.481,0.505],[0.496,0.524]],
 [0.50,[0.517,0.539],[0.534,0.560],[0.551,0.581]],
@@ -1029,11 +1190,10 @@ const JIS_CU=[
 [6.30,[6.440,6.654],[6.651,6.877],[6.834,7.076]],
 ];
 
-// ── iOS Safari 相容性觸發 ──
-try { lookup(); } catch(e) {}
-document.addEventListener("DOMContentLoaded", function(){ try{lookup();}catch(e){} });
-setTimeout(function(){ try{lookup();}catch(e){} }, 300);
-setTimeout(function(){ try{lookup();}catch(e){} }, 800);
+try{lookup();}catch(e){}
+document.addEventListener("DOMContentLoaded",function(){try{lookup();}catch(e){}});
+setTimeout(function(){try{lookup();}catch(e){}},300);
+setTimeout(function(){try{lookup();}catch(e){}},800);
 </script>
 </body>
 </html>
