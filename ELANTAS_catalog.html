@@ -14,53 +14,16 @@ details[open]{border-color:rgba(200,169,110,.35)!important}
 .lang-id .zh-only{display:none!important}
 
 /* ── LOGIN OVERLAY ── */
-#login-overlay{
-  position:fixed;inset:0;z-index:9999;
-  background:#0e0f11;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-}
-#login-box{
-  width:100%;max-width:360px;
-  background:#16181c;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:18px;
-  padding:32px 28px;
-  text-align:center;
-}
-#login-box .logo{
-  font-family:monospace;font-size:12px;letter-spacing:.18em;
-  color:#c8a96e;text-transform:uppercase;margin-bottom:6px;
-}
-#login-box .subtitle{
-  font-size:12px;color:#8a8d93;margin-bottom:28px;line-height:1.5;
-}
-#login-box input{
-  width:100%;padding:11px 14px;
-  background:#1e2026;border:1px solid rgba(255,255,255,.1);
-  border-radius:10px;color:#f0f0ee;font-size:15px;
-  font-family:-apple-system,sans-serif;
-  outline:none;margin-bottom:12px;
-  transition:border-color .2s;
-  -webkit-appearance:none;
-}
-#login-box input:focus{border-color:rgba(200,169,110,.5);}
-#login-box button{
-  width:100%;padding:12px;
-  background:rgba(200,169,110,.15);
-  border:1px solid rgba(200,169,110,.35);
-  border-radius:10px;color:#c8a96e;
-  font-size:14px;font-weight:600;
-  font-family:-apple-system,sans-serif;
-  cursor:pointer;transition:background .15s;
-  letter-spacing:.04em;
-}
-#login-box button:hover{background:rgba(200,169,110,.25);}
-#login-error{
-  font-size:12px;color:#e85d5d;
-  margin-top:10px;min-height:18px;
-}
-#main-content{display:none;}
+#login-overlay{position:fixed;inset:0;z-index:9999;background:#0e0f11;display:flex;align-items:center;justify-content:center;padding:20px}
+#login-box{width:100%;max-width:360px;background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:32px 28px;text-align:center}
+#login-box .logo{font-family:monospace;font-size:12px;letter-spacing:.18em;color:#c8a96e;text-transform:uppercase;margin-bottom:6px}
+#login-box .subtitle{font-size:12px;color:#8a8d93;margin-bottom:28px;line-height:1.5}
+#login-box input{width:100%;padding:11px 14px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#f0f0ee;font-size:15px;font-family:-apple-system,sans-serif;outline:none;margin-bottom:12px;transition:border-color .2s;-webkit-appearance:none}
+#login-box input:focus{border-color:rgba(200,169,110,.5)}
+#login-box button{width:100%;padding:12px;background:rgba(200,169,110,.15);border:1px solid rgba(200,169,110,.35);border-radius:10px;color:#c8a96e;font-size:14px;font-weight:600;font-family:-apple-system,sans-serif;cursor:pointer;transition:background .15s;letter-spacing:.04em}
+#login-box button:hover{background:rgba(200,169,110,.25)}
+#login-error{font-size:12px;color:#e85d5d;margin-top:10px;min-height:18px}
+#main-content{display:none}
 /* Vendor filter */
 .vendor-elantas{border-left:3px solid #4e9af1!important}
 .vendor-totoku{border-left:3px solid #f17c4e!important}
@@ -69,7 +32,12 @@ details[open]{border-color:rgba(200,169,110,.35)!important}
 /* filter hide states */
 body.show-elantas .vendor-totoku{display:none!important}
 body.show-totoku .vendor-elantas{display:none!important}
-body.show-all .vendor-elantas,body.show-all .vendor-totoku{display:block}
+body.show-elantas .vendor-iva{display:none!important}
+body.show-totoku .vendor-iva{display:none!important}
+body.show-iva .vendor-elantas{display:none!important}
+body.show-iva .vendor-totoku{display:none!important}
+.vendor-iva{border-left:3px solid #e84b4b!important}
+body.show-all .vendor-elantas,body.show-all .vendor-totoku,body.show-all .vendor-iva{display:block}
 /* Page tab system */
 .page-catalog{display:block}
 .page-guide{display:none}
@@ -85,7 +53,7 @@ body.tab-guide .product-nav-id{display:none!important}
 <!-- ── LOGIN OVERLAY ── -->
 <div id="login-overlay">
   <div id="login-box">
-    <div class="logo">ELANTAS + TOTOKU</div>
+    <div class="logo">ELANTAS · TOTOKU · IVA</div>
     <div class="subtitle">漆包線漆整合目錄 · Katalog Gabungan Email Wire Enamel<br>限公司內部人員使用 · Hanya untuk Internal Perusahaan</div>
     <input type="password" id="pw-input" placeholder="請輸入密碼 / Masukkan Kata Sandi"
       onkeydown="if(event.key==='Enter') window.doLogin()">
@@ -96,6 +64,10 @@ body.tab-guide .product-nav-id{display:none!important}
 
 <!-- ── MAIN CONTENT ── -->
 <div id="main-content">
+
+<!-- ══════════════════════════════════════════════════════════
+     HEADER (sticky, always visible)
+     ══════════════════════════════════════════════════════════ -->
 <div style="position:sticky;top:0;z-index:100;background:rgba(14,15,17,.96);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)">
 
   <!-- Top bar: logo + page tabs + lang toggle -->
@@ -124,12 +96,14 @@ body.tab-guide .product-nav-id{display:none!important}
       <button id="vf-all" onclick="setVendor('all')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(200,169,110,.4);border-radius:14px;cursor:pointer;background:rgba(200,169,110,.2);color:#c8a96e;font-weight:600;transition:all .15s">全部</button>
       <button id="vf-elantas" onclick="setVendor('elantas')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(78,154,241,.4);border-radius:14px;cursor:pointer;background:transparent;color:#4e9af1;transition:all .15s">艾倫塔斯</button>
       <button id="vf-totoku" onclick="setVendor('totoku')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(241,124,78,.4);border-radius:14px;cursor:pointer;background:transparent;color:#f17c4e;transition:all .15s">TOTOKU</button>
+      <button id="vf-iva" onclick="setVendor('iva')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(232,75,75,.4);border-radius:14px;cursor:pointer;background:transparent;color:#e84b4b;transition:all .15s">IVA</button>
     </div>
     <div class="vendor-filter-bar id-only" style="display:flex;align-items:center;gap:5px;flex-shrink:0">
       <span style="font-size:10px;color:#8a8d93;margin-right:2px">Supplier：</span>
       <button id="vf-all-id" onclick="setVendor('all')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(200,169,110,.4);border-radius:14px;cursor:pointer;background:rgba(200,169,110,.2);color:#c8a96e;font-weight:600;transition:all .15s">Semua</button>
       <button id="vf-elantas-id" onclick="setVendor('elantas')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(78,154,241,.4);border-radius:14px;cursor:pointer;background:transparent;color:#4e9af1;transition:all .15s">ELANTAS</button>
       <button id="vf-totoku-id" onclick="setVendor('totoku')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(241,124,78,.4);border-radius:14px;cursor:pointer;background:transparent;color:#f17c4e;transition:all .15s">TOTOKU</button>
+      <button id="vf-iva-id" onclick="setVendor('iva')" style="padding:4px 10px;font-size:11px;font-family:-apple-system,sans-serif;border:1px solid rgba(232,75,75,.4);border-radius:14px;cursor:pointer;background:transparent;color:#e84b4b;transition:all .15s">IVA</button>
     </div>
 
     <!-- Language Toggle -->
@@ -221,6 +195,29 @@ body.tab-guide .product-nav-id{display:none!important}
   </div>
   </div>
 
+
+  <!-- Vendor Legend ZH -->
+  <div class="zh-only" style="margin-bottom:14px">
+    <div style="padding:12px 16px;background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px">
+      <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:10px">廠商識別說明</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:32px;background:#4e9af1;border-radius:2px;flex-shrink:0"></div><div><div style="font-size:13px;font-weight:500;color:#f0f0ee">ELANTAS 艾倫塔斯</div><div style="font-size:11px;color:#8a8d93">馬來西亞 · 100 產品</div></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:32px;background:#f17c4e;border-radius:2px;flex-shrink:0"></div><div><div style="font-size:13px;font-weight:500;color:#f0f0ee">TOTOKU 東特電線</div><div style="font-size:11px;color:#8a8d93">日本 · 42 產品</div></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:32px;background:#e84b4b;border-radius:2px;flex-shrink:0"></div><div><div style="font-size:13px;font-weight:500;color:#f0f0ee">IVA 中國</div><div style="font-size:11px;color:#8a8d93">常州 · 扁線絕緣漆專家 · 14 產品</div></div></div>
+      </div>
+    </div>
+  </div>
+  <!-- Vendor Legend ID -->
+  <div class="id-only" style="margin-bottom:14px">
+    <div style="padding:12px 16px;background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px">
+      <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:10px">Identifikasi Supplier</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:32px;background:#4e9af1;border-radius:2px;flex-shrink:0"></div><div><div style="font-size:13px;font-weight:500;color:#f0f0ee">ELANTAS</div><div style="font-size:11px;color:#8a8d93">Malaysia · 100 Produk</div></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:32px;background:#f17c4e;border-radius:2px;flex-shrink:0"></div><div><div style="font-size:13px;font-weight:500;color:#f0f0ee">TOTOKU</div><div style="font-size:11px;color:#8a8d93">Jepang · 42 Produk</div></div></div>
+        <div style="display:flex;align-items:center;gap:8px"><div style="width:3px;height:32px;background:#e84b4b;border-radius:2px;flex-shrink:0"></div><div><div style="font-size:13px;font-weight:500;color:#f0f0ee">IVA China</div><div style="font-size:11px;color:#8a8d93">Changzhou · Spesialis Flat Wire · 14 Produk</div></div></div>
+      </div>
+    </div>
+  </div>
   <!-- Product Sections ZH -->
   <div class="zh-only">
 <section id="s_PVF" style="margin-bottom:32px">
@@ -324,6 +321,32 @@ body.tab-guide .product-nav-id{display:none!important}
     </div>
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">黏度測定條件：200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
+</details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">BPE 1731 聚酯底漆（通用型扁線）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 130°C · 扁線底漆 · 高分子量聚酯</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">高分子量聚酯漆，適用於各種截面扁線，表面佳、附著性優異</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">變壓器、電抗器扁線底漆層；多層複合塗覆系統底漆</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">高分子量確保柔韌性；優良附著性；表面光滑</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆（底漆層）；與中漆/面漆搭配使用</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1754</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+4+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、電抗器、耐化學性</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19862</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+5+3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、電抗器、耐浸漬性</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-28</td><td style="padding:6px 10px">28–30%（1.75g/1h/200°C）</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">扁線底漆標準型</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-31</td><td style="padding:6px 10px">30–32%（1.75g/1h/200°C）</td><td style="padding:6px 10px">50–80 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">扁線底漆高固含型</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 1731 是 IVA 扁線方案最常見的底漆，搭配 19862 或 1754 作中漆，1766 面漆，可達 TI 200°C（見方案1、2）。</div>
+</div>
 </details>
 </section><section id="s_PU" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
@@ -829,6 +852,132 @@ body.tab-guide .product-nav-id{display:none!important}
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">黏度測定條件：200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
 </details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 1754 改性聚酯亞胺中漆<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 200°C · 扁線中漆 · 改性聚酯亞胺（EI）</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">改性聚酯亞胺，熱衝擊度大，整體性能佳，柔韌性和附著性優，適用重規格扁圓線</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">重規格圓線或扁線中漆層；方案1變壓器/電抗器體系</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">熱衝擊性能突出；柔韌性和附著性優良；綜合性能全面</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆（中漆層）；底漆1731＋中漆1754＋面漆1766</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1754-33</td><td style="padding:6px 10px">32–34%（1.75g/1h/180°C）</td><td style="padding:6px 10px">30–50 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">扁線中漆標準型</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 IVA 方案1的核心中漆，與底漆1731和面漆1766組合（3+4+4道），達到TI 200°C，適合變壓器和電抗器耐化學性要求。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 19862 耐熱聚酯中漆（高固含）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 180°C · 扁線中漆 · THEIC改性高固含聚酯</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">高固含低黏度THEIC改性聚酯，固含量高達45%，熱性能優良，高老化後附著性保持佳</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">扁線中漆層；方案2變壓器/電抗器耐浸漬系統</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">超高固含（45%）降低溶劑用量；熱老化後附著性保持優良；低黏度高速適應性好</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆（中漆層）；底漆1731＋中漆19862＋面漆1766</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19862-36</td><td style="padding:6px 10px">35–37%（1g/1h/180°C）</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">高固含中漆</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 方案2（1731＋19862＋1766，3+5+3道，TI 200°C），固含量高達45%產品可選，特別適合需要減少溶劑排放的場合。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">MPAI 19674 改性聚酰胺酰亞胺底漆（扁線專用）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 200°C · 扁線底漆 · 改性PAI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">改性PAI，用於塗覆標準漆膜前的大規格圓/扁線導體預塗層，提高後續漆層附著性，特別推薦大規格扁線</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">光伏逆變器、電動車驅動電機大規格扁線底漆；EV/新能源應用</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">顯著提升漆膜對導體附著性（提升10%以上）；優良柔韌性；特別適合大規格扁線</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">底漆預塗覆，後續接標準漆膜；扁線1+9/1+6道系統</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+10</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">電感線圈、充電樁、軌道交通、可立繞</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">606MH</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+9+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">光伏逆變器、充電樁、風電變壓器、可立繞</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19672</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">506</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME/606MH</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+14+4+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">高附著性、高彈性、高耐刮性</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME/606WN</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+6+14+6</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">耐電暈、附著力佳</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19674-27</td><td style="padding:6px 10px">27–29%（1g/1h/180°C）</td><td style="padding:6px 10px">4,000–6,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">光伏/EV底漆</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19674-30</td><td style="padding:6px 10px">29–31%（1g/1h/180°C）</td><td style="padding:6px 10px">6,000–9,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">光伏/EV底漆高固版</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 光伏逆變器方案（19674＋19902ME，1+10道，TI 200°C）和EV驅動電機方案均以此為底漆。附著力提升對鋁扁線尤其重要。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 515 THEIC改性聚酯亞胺中漆<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 180°C · 扁線中漆 · THEIC改性聚酯亞胺</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">適用於立式與臥式漆包機，圓線和扁線均適用，優異柔韌性和附著性，表面性能佳</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">變壓器、工業電機扁線中漆（方案4，配底漆1748）</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">優良柔韌性和附著性；適用立/臥式機均可；表面平滑</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆（中漆層）；底漆1748＋中漆515，達TI 180°C</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">515</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">180</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、工業電機、可模具塗覆</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">515-43</td><td style="padding:6px 10px">42–44%（1g/1h/180°C）</td><td style="padding:6px 10px">3,000–6,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">扁線中漆</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 506 THEIC改性聚酯亞胺中漆（EV圓線）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 200°C · EV電機中漆 · THEIC改性聚酯亞胺</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">THEIC改性聚酯亞胺，推薦立式漆包機圓線底漆；扁線底漆推薦改性PAI 19674；提高塗覆層附著性</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">EV驅動電機圓線中漆（方案EV-1）</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">THEIC改性提升耐熱性至200°C；高固含（49–51%）；圓線適用性佳</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆中漆層；EV方案1：底漆19672＋中漆506＋中漆19902ME＋面漆606MH</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">506-50</td><td style="padding:6px 10px">49–51%（1g/1h/180°C）</td><td style="padding:6px 10px">4,000–7,000 mPa.s@30°C</td><td style="padding:6px 10px;color:#8a8d93">EV電機高固中漆</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div>
+</div>
+</details>
 </section><section id="s_PE" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
@@ -1202,6 +1351,82 @@ body.tab-guide .product-nav-id{display:none!important}
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">黏度測定條件：200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
 </details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">BPE 1731 聚酯底漆（通用型扁線）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 130°C · 扁線底漆 · 高分子量聚酯</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">高分子量聚酯漆，適用於各種截面扁線，表面佳、附著性優異</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">變壓器、電抗器扁線底漆層；多層複合塗覆系統底漆</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">高分子量確保柔韌性；優良附著性；表面光滑</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆（底漆層）；與中漆/面漆搭配使用</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1754</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+4+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、電抗器、耐化學性</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19862</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+5+3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、電抗器、耐浸漬性</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-28</td><td style="padding:6px 10px">28–30%（1.75g/1h/200°C）</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">扁線底漆標準型</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-31</td><td style="padding:6px 10px">30–32%（1.75g/1h/200°C）</td><td style="padding:6px 10px">50–80 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">扁線底漆高固含型</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 1731 是 IVA 扁線方案最常見的底漆，搭配 19862 或 1754 作中漆，1766 面漆，可達 TI 200°C（見方案1、2）。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">MPE 1748 改性聚酯底漆（155級）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 155°C · 扁線底漆 · THEIC改性聚酯</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">THEIC改性高分子量聚酯，耐熱提升至155°C，附著性優異，耐鹽水針孔性佳</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">變壓器、工業電機扁線底漆；可模具塗覆（Die Application）系統</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">高分子量優良柔韌性；鹽水中優異耐針孔性；附著性優良</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆（底漆層）；搭配中漆515或面漆19902ME</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、電抗器、可模具塗覆</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">515</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">180</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、工業電機、可模具塗覆</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1748-43</td><td style="padding:6px 10px">42–44%（1g/1h/180°C）</td><td style="padding:6px 10px">1,500–2,500 mPa.s@30°C</td><td style="padding:6px 10px;color:#8a8d93">扁線底漆</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 IVA 方案3（1748＋19902ME，10+2道，TI 200°C）與方案4（1748＋515，10+2道，TI 180°C）均以此為底漆。您目前正在評估鋁扁線塗覆問題，1748的高附著性配方特別適合鋁線基材。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PVF 220GP 縮醛底漆（油浸變壓器）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 120°C · 扁線底漆 · 縮醛樹脂（PVF）</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">PVF縮醛漆，附著性優，耐化學性，廣泛用於油浸式變壓器</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">油浸式變壓器扁線；換位導線（CTC）底漆</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">優良附著性；耐變壓器油化學性；可與19225環氧-苯氧自粘漆共爐烘烤</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">模具塗覆（底漆層）；方案5搭配19225中漆</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">5</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220GP</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19225</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">120</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">油浸變壓器、換位導線（CTC）</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">220GP-22</td><td style="padding:6px 10px">21–23%（1g/1h/180°C）</td><td style="padding:6px 10px">4,000–7,000 mPa.s@30°C</td><td style="padding:6px 10px;color:#8a8d93">油浸變壓器/CTC底漆</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 IVA方案5（220GP＋19225，10+2道，TI 120°C）專為油浸式變壓器和換位導線設計，可與PVF220GP共爐烘烤。</div>
+</div>
+</details>
 </section><section id="s_PAI" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
@@ -1567,6 +1792,107 @@ body.tab-guide .product-nav-id{display:none!important}
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">黏度測定條件：200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
 </details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">19902ME 改性聚酰胺酰亞胺（220級）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · 中漆/面漆 · 改性PAI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">改性PAI，優異柔韌性，特別推薦大規格圓線、扁線及最終需要高柔韌的漆包線；可全AI塗覆或複合塗覆面漆</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">變壓器/電抗器（方案3）；光伏逆變器（PV方案1/2）；EV驅動電機；充電樁；風電變壓器</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">TI 220°C高耐熱；優異柔韌性和附著性；可全塗或作複合面漆；適合可立繞工藝</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">可作全AI單獨塗覆（方案3）或多層複合面漆；搭配底漆1748/19674/19672</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">變壓器、電抗器、可模具塗覆</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+10</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">電感、充電樁、軌道交通</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">606MH</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+9+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">光伏逆變器、風電變壓器</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19672</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">506</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+14+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV驅動電機中漆層</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19902ME30</td><td style="padding:6px 10px">29–31%（1g/1h/180°C）</td><td style="padding:6px 10px">2,200–3,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">標準型</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19902ME31</td><td style="padding:6px 10px">30–32%（1g/1h/180°C）</td><td style="padding:6px 10px">3,000–5,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">高黏度型</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 這就是您提到的「19902ME 220級改性聚酰胺酰亞胺」。IVA最重要的中/面漆，廣泛用於所有高階應用方案（變壓器方案3、光伏方案1/2、EV方案1/2）。特別推薦扁線可立繞工藝。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PAI 1766 聚酰胺酰亞胺面漆（高分子量）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · 面漆 · 高分子量PAI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">高分子量PAI，特別適合重規格圓線或扁線，耐熱衝擊和耐冷媒複合塗覆面漆，熱性能優良，高切穿性能</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">變壓器、電抗器面漆（方案1/2）；耐冷媒複合漆包線面漆</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">高分子量確保高耐熱性和耐冷媒性；高切穿溫度；優良熱性能</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">面漆層；底漆1731＋中漆1754或19862＋面漆1766</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1766-20</td><td style="padding:6px 10px">19–21%（1g/1h/180°C）</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">面漆標準型</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1766-26</td><td style="padding:6px 10px">25–27%（1g/1h/180°C）</td><td style="padding:6px 10px">130–180 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">面漆高固高黏型</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 IVA方案1和方案2的面漆。高分子量設計使其在扁線和重規格圓線上表現特別突出，耐熱衝擊和耐冷媒性均達到PAI最高水準。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PAI 606MH 芳族聚酰胺酰亞胺面漆（高黏度）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · 面漆 · 芳族高分子量PAI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">芳族高分子量PAI，用於耐高溫、耐刮、耐冷媒的漆包圓線和扁線，表面好，熱性能優，具有較高軟化擊穿性</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">光伏逆變器面漆（PV方案2）；EV驅動電機面漆；風電變壓器；充電樁</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">芳族結構提供更高耐刮性；高切穿溫度；優良表面性能；耐冷媒性強</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">面漆層；底漆19674＋中漆19902ME＋面漆606MH</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">606MH20</td><td style="padding:6px 10px">19–21%（1g/1h/180°C）</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">面漆標準型</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">606MH30</td><td style="padding:6px 10px">28–30%（1g/1h/180°C）</td><td style="padding:6px 10px">3,000–5,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">面漆高固型</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">606MH36</td><td style="padding:6px 10px">35–37%（1g/1h/180°C）</td><td style="padding:6px 10px">5,000–8,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">面漆超高固型</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 光伏逆變器和EV電機的頂級面漆選擇，芳族結構賦予更高耐刮和耐熱性。高固含型（606MH36）特別適合需要厚膜塗覆的扁線場合。</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">APAI 19672 芳香族聚酰胺酰亞胺底漆（EV）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · EV電機底漆 · 芳香族PAI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">芳香族PAI，用於塗覆標準漆膜前的預塗層，底漆一道即可提升漆膜對導體附著性10%以上，特別推薦大規格扁線</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">新能源汽車（EV）驅動電機大規格漆包圓/扁線底漆</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">芳香族結構提供更高耐熱性；附著性提升10%+；特別適合EV驅動電機</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">底漆預塗（1道），後接506/19902ME中漆層</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19672</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">506+19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">606MH</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+14+4+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV驅動電機：高附著性、高彈性、高耐刮性</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME+606WN</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+6+14+6</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV驅動電機：耐電暈、附著力佳</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19672-27</td><td style="padding:6px 10px">26–28%（1g/1h/180°C）</td><td style="padding:6px 10px">2,000–4,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">EV底漆</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19672-30</td><td style="padding:6px 10px">29–31%（1g/1h/180°C）</td><td style="padding:6px 10px">5,000–8,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">EV底漆高固型</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div>
+</div>
+</details>
 </section><section id="s_PI" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
@@ -1643,6 +1969,32 @@ body.tab-guide .product-nav-id{display:none!important}
     </div>
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">① 3g 1h 180°C / mPa.s 20°C　② 1g 1h 180°C / DIN4 s 20°C</div>
   </div>
+</details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PI 735OWR 改性聚酰亞胺漆（240級）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 240°C · EV電機底漆/面漆 · 改性PI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">改性PI，除常規PAI性能外，耐化學品（機油、有機溶液、水、酸、鹼等），高溫使用效果依舊良好</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">EV驅動電機（方案EV-3）：高熱級、高PDIV、耐油水場合</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">TI 240°C超高耐熱；高PDIV耐電暈性；耐化學品性能全面；高溫依然有效</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">底漆兼面漆（EV-3：735OWR底漆＋735CR中漆，4+12+4道）</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">735OWR</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">735CR</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">735OWR</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">4+12+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">240</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV驅動電機：高熱級、高PDIV、耐油水</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">735OWR-25</td><td style="padding:6px 10px">24–26%（1g/1h/180°C）</td><td style="padding:6px 10px">1,000–2,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">PI底漆/面漆</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 IVA最高耐熱等級產品（TI 240°C），EV驅動電機方案3（735OWR＋735CR）。耐化學品性能使其在需要接觸機油等介質的環境中更具優勢。</div>
+</div>
 </details>
 </section><section id="s_NY" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
@@ -1777,6 +2129,32 @@ body.tab-guide .product-nav-id{display:none!important}
     </div>
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">黏度測定條件：200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
+</details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">19225 環氧-苯氧自粘漆（CTC換位導線）<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 120°C · 自粘中漆 · 環氧-苯氧型</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">描述</div><div style="font-size:13px;line-height:1.55">環氧-苯氧可粘合漆，跑線性佳，粘合力強，粘合溫度140–170°C，再軟化130–150°C，可與PVF220GP共爐烘烤</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.55">油浸式變壓器換位導線（CTC）；需要自粘合功能的扁線</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">特點</div><div style="font-size:13px;line-height:1.55">粘合溫度140–170°C；可與PVF底漆共爐；再軟化溫度130–150°C；甲醇浸泡可去除粘性</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">塗覆方式</div><div style="font-size:13px;line-height:1.55">中漆層（方案5）；底漆220GP＋中漆19225，TI 120°C</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">應用方案</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">方案</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">底漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">中漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">面漆</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">道次</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">熱級</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">用途</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">5</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220GP</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19225</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">120</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">油浸變壓器、換位導線（CTC）</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">技術規格</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">型號</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">固含量 (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">黏度 (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">備注</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19225-22</td><td style="padding:6px 10px">21–23%（1g/1h/180°C）</td><td style="padding:6px 10px">3,000–4,500 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">CTC自粘漆</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">黏度：1g-1h-180°C / mPa.s 20°C（或特別標注）</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 用於換位導線（CTC），可自粘合成型，不需另外含浸，浸入甲醇溶劑後可去除粘性。與PVF 220GP可共爐同時烘烤，大幅簡化製程。</div>
+</div>
 </details>
 </section><section id="s_PRIM" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
@@ -2060,6 +2438,32 @@ body.tab-guide .product-nav-id{display:none!important}
     </div>
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">Kondisi pengukuran viskositas: 200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
+</details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">BPE 1731 Email Poliester Basecoat (Kawat Datar)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 130°C · Basecoat Kawat Datar · Poliester Berat Molekul Tinggi</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">Poliester berat molekul tinggi, cocok untuk kawat datar berbagai penampang, permukaan baik, adhesi sangat baik</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Basecoat kawat datar trafo, reaktor; lapisan pertama sistem multi-coat</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Berat molekul tinggi menjamin fleksibilitas; adhesi sangat baik; permukaan halus</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies (lapisan dasar); dikombinasi dengan middle coat/topcoat</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1754</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+4+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Reaktor, Tahan kimia</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19862</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+5+3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Reaktor, Tahan impregnasi</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-28</td><td style="padding:6px 10px">28–30% (1.75g/1h/200°C)</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat kawat datar standar</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-31</td><td style="padding:6px 10px">30–32% (1.75g/1h/200°C)</td><td style="padding:6px 10px">50–80 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat solid tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 1731 adalah basecoat paling umum dalam sistem kawat datar IVA, dikombinasi dengan 1754 atau 19862 middle coat dan 1766 topcoat, mencapai TI 200°C.</div>
+</div>
 </details>
 </section><section id="s_PU" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
@@ -2565,6 +2969,132 @@ body.tab-guide .product-nav-id{display:none!important}
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">Kondisi pengukuran viskositas: 200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
 </details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 1754 Middle Coat Poliesterimida Modified<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 200°C · Middle Coat Kawat Datar · EI Modified</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">Poliesterimida modified, ketahanan kejut panas besar, sifat komprehensif sangat baik, fleksibilitas dan adhesi baik untuk kawat berat</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Middle coat kawat bulat berat atau kawat datar; Skema 1 sistem trafo/reaktor</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Ketahanan kejut panas sangat menonjol; fleksibilitas dan adhesi sangat baik; sifat komprehensif lengkap</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies (middle coat); basecoat 1731 + middle 1754 + topcoat 1766</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1754-33</td><td style="padding:6px 10px">32–34% (1.75g/1h/180°C)</td><td style="padding:6px 10px">30–50 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Middle coat kawat datar standar</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 Middle coat utama Skema 1 IVA, dikombinasi dengan basecoat 1731 dan topcoat 1766 (3+4+4 pass), mencapai TI 200°C untuk trafo dan reaktor tahan kimia.</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 19862 Middle Coat Poliester Tahan Panas (Solid Tinggi)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 180°C · Middle Coat Kawat Datar · THEIC-Modified Solid Tinggi</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">THEIC-modified polyester solid tinggi-viskositas rendah, kandungan solid hingga 45%, sifat termal sangat baik, adhesi setelah penuaan panas sangat baik</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Middle coat kawat datar; Skema 2 sistem trafo/reaktor tahan impregnasi</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Solid sangat tinggi (45%) mengurangi penggunaan pelarut; adhesi setelah penuaan panas sangat baik; viskositas rendah</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies (middle coat); basecoat 1731 + middle 19862 + topcoat 1766</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19862-36</td><td style="padding:6px 10px">35–37% (1g/1h/180°C)</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Middle coat solid tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 Skema 2 (1731+19862+1766, 3+5+3 pass, TI 200°C), tersedia produk dengan solid content hingga 45%, cocok untuk aplikasi yang ingin mengurangi emisi pelarut.</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">MPAI 19674 Basecoat PAI Modified (Kawat Datar Besar)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 200°C · Basecoat Kawat Datar · PAI Modified</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">PAI modified untuk pra-lapisan kawat bulat/datar besar sebelum enamel standar, meningkatkan adhesi lapisan enamel, sangat direkomendasikan untuk kawat datar ukuran besar</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Basecoat kawat datar besar PV inverter, motor penggerak EV; aplikasi energi baru</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Meningkatkan adhesi enamel ke konduktor >10%; fleksibilitas sangat baik; khusus kawat datar besar</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Pra-lapisan basecoat, diikuti enamel standar; sistem 1+9 atau 1+6 pass</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+10</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Induktor, Pengisian EV, Transportasi rel</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">606MH</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+9+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV Inverter, Charger, Trafo angin</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19674-27</td><td style="padding:6px 10px">27–29% (1g/1h/180°C)</td><td style="padding:6px 10px">4,000–6,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat PV/EV</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19674-30</td><td style="padding:6px 10px">29–31% (1g/1h/180°C)</td><td style="padding:6px 10px">6,000–9,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat PV/EV solid tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 515 Middle Coat THEIC-Modified Polyesterimide<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 180°C · Middle Coat Kawat Datar · THEIC-Modified EI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">THEIC-modified polyester-imide, cocok mesin vertikal dan horizontal, kawat bulat dan datar, fleksibilitas dan adhesi sangat baik</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Middle coat kawat datar trafo, motor industri (Skema 4, dengan basecoat 1748)</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Fleksibilitas dan adhesi sangat baik; cocok mesin V/H; permukaan halus</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies (middle coat); basecoat 1748 + middle 515, mencapai TI 180°C</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">515</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">180</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Motor Industri, Die Application</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">515-43</td><td style="padding:6px 10px">42–44% (1g/1h/180°C)</td><td style="padding:6px 10px">3,000–6,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Middle coat kawat datar</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">HPE 506 THEIC-Modified EI Middle Coat (Motor EV Kawat Bulat)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 200°C · Middle Coat Motor EV · THEIC-Modified EI</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">THEIC-modified polyester-imide, direkomendasikan sebagai basecoat mesin vertikal kawat bulat; kawat datar direkomendasikan PAI modified 19674; meningkatkan adhesi lapisan</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Middle coat kawat bulat motor EV (Skema EV-1)</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">THEIC-modified meningkatkan TI ke 200°C; solid content sangat tinggi (49–51%); cocok untuk kawat bulat</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies middle coat; Skema EV-1: basecoat 19672 + middle 506 + 19902ME + topcoat 606MH</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">506-50</td><td style="padding:6px 10px">49–51% (1g/1h/180°C)</td><td style="padding:6px 10px">4,000–7,000 mPa.s@30°C</td><td style="padding:6px 10px;color:#8a8d93">Middle coat EV solid sangat tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
+</details>
 </section><section id="s_PE" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
@@ -2938,6 +3468,82 @@ body.tab-guide .product-nav-id{display:none!important}
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">Kondisi pengukuran viskositas: 200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
 </details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">BPE 1731 Email Poliester Basecoat (Kawat Datar)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 130°C · Basecoat Kawat Datar · Poliester Berat Molekul Tinggi</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">Poliester berat molekul tinggi, cocok untuk kawat datar berbagai penampang, permukaan baik, adhesi sangat baik</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Basecoat kawat datar trafo, reaktor; lapisan pertama sistem multi-coat</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Berat molekul tinggi menjamin fleksibilitas; adhesi sangat baik; permukaan halus</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies (lapisan dasar); dikombinasi dengan middle coat/topcoat</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1754</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+4+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Reaktor, Tahan kimia</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1731</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19862</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1766</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3+5+3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Reaktor, Tahan impregnasi</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-28</td><td style="padding:6px 10px">28–30% (1.75g/1h/200°C)</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat kawat datar standar</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1731-31</td><td style="padding:6px 10px">30–32% (1.75g/1h/200°C)</td><td style="padding:6px 10px">50–80 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat solid tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 1731 adalah basecoat paling umum dalam sistem kawat datar IVA, dikombinasi dengan 1754 atau 19862 middle coat dan 1766 topcoat, mencapai TI 200°C.</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">MPE 1748 Basecoat Poliester Modified (Kelas 155)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 155°C · Basecoat Kawat Datar · THEIC-Modified Polyester</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">THEIC-modified polyester berat molekul tinggi, TI meningkat ke 155°C, adhesi sangat baik, ketahanan pinhole dalam air garam sangat baik</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Basecoat kawat datar trafo, motor industri; sistem Die Application</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Berat molekul tinggi, fleksibilitas sangat baik; ketahanan pinhole dalam air garam sangat baik; adhesi sangat baik</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies (lapisan dasar); kombinasi dengan middle coat 515 atau topcoat 19902ME</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Reaktor, Die Application</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">515</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">180</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Motor industri, Die Application</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1748-43</td><td style="padding:6px 10px">42–44% (1g/1h/180°C)</td><td style="padding:6px 10px">1,500–2,500 mPa.s@30°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat kawat datar</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 Sistem IVA Skema 3 (1748+19902ME, 10+2 pass, TI 200°C) dan Skema 4 (1748+515, 10+2 pass, TI 180°C) keduanya menggunakan 1748 sebagai basecoat. Formula adhesi tinggi sangat cocok untuk substrat kawat aluminium.</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PVF 220GP Basecoat PVF (Trafo Terendam Minyak)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 120°C · Basecoat Kawat Datar · Resin PVF</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">Email PVF, adhesi sangat baik, ketahanan kimia baik, banyak digunakan pada trafo terendam minyak</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Kawat datar trafo terendam minyak; basecoat kawat transposisi (CTC)</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Adhesi sangat baik; tahan minyak trafo; bisa dibakar satu oven dengan self-bonding 19225</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Aplikasi dies (lapisan dasar); Skema 5 kombinasi dengan middle coat 19225</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">5</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220GP</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19225</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">120</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo minyak terendam, Kawat Transposisi CTC</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">220GP-22</td><td style="padding:6px 10px">21–23% (1g/1h/180°C)</td><td style="padding:6px 10px">4,000–7,000 mPa.s@30°C</td><td style="padding:6px 10px;color:#8a8d93">Trafo minyak/CTC</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
+</details>
 </section><section id="s_PAI" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
@@ -3303,6 +3909,107 @@ body.tab-guide .product-nav-id{display:none!important}
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">Kondisi pengukuran viskositas: 200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
 </details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">19902ME PAI Modified (Kelas 220°C)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · Middle/Top Coat · PAI Modified</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">PAI modified, fleksibilitas sangat baik, sangat direkomendasikan untuk kawat bulat/datar besar yang membutuhkan fleksibilitas tinggi; bisa full PAI atau multi-coat</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Trafo/reaktor (Skema 3); PV inverter (PV-1/2); motor EV; charger; trafo angin</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">TI 220°C tahan panas tinggi; fleksibilitas dan adhesi sangat baik; cocok untuk proses winding tegak (立繞)</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Bisa sebagai full coat PAI sendiri atau multi-coat topcoat; kombinasi dengan basecoat 1748/19674/19672</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo-3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1748</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo, Reaktor, Die Application</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+10</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">200</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Induktor, Charger, Transportasi</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV-2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">606MH</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+9+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">PV Inverter, Trafo Angin</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19672</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">506</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+14+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Motor EV, middle coat</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19902ME30</td><td style="padding:6px 10px">29–31% (1g/1h/180°C)</td><td style="padding:6px 10px">2,200–3,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Tipe standar</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19902ME31</td><td style="padding:6px 10px">30–32% (1g/1h/180°C)</td><td style="padding:6px 10px">3,000–5,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Tipe viskositas tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 Inilah "19902ME 220 kelas PAI modified" yang Anda sebutkan. Enamel middle/topcoat terpenting IVA, digunakan di semua skema performa tinggi (Skema Trafo 3, PV 1/2, EV 1/2). Sangat direkomendasikan untuk proses winding tegak kawat datar.</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PAI 1766 Topcoat PAI (Berat Molekul Tinggi)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · Topcoat · PAI Berat Molekul Tinggi</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">PAI berat molekul tinggi, khusus untuk kawat bulat/datar berat, ketahanan kejut panas dan refrigeran, performa termal sangat baik, suhu cut-through tinggi</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Topcoat trafo, reaktor (Skema 1/2); topcoat kawat tahan refrigeran</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Berat molekul tinggi menjamin ketahanan panas dan refrigeran; suhu cut-through tinggi; performa termal sangat baik</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Lapisan topcoat; basecoat 1731 + middle 1754/19862 + topcoat 1766</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1766-20</td><td style="padding:6px 10px">19–21% (1g/1h/180°C)</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Topcoat standar</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">1766-26</td><td style="padding:6px 10px">25–27% (1g/1h/180°C)</td><td style="padding:6px 10px">130–180 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Topcoat solid tinggi-viskositas tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PAI 606MH Topcoat PAI Aromatik (Viskositas Tinggi)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · Topcoat · PAI Aromatik Berat Molekul Tinggi</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">PAI aromatik berat molekul tinggi, untuk kawat bulat/datar tahan suhu tinggi, abrasi, refrigeran; permukaan baik, performa termal baik, cut-through tinggi</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Topcoat PV inverter (PV-2); motor EV; trafo angin; charger</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Struktur aromatik memberikan ketahanan abrasi lebih tinggi; suhu cut-through tinggi; permukaan sangat baik; tahan refrigeran</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Lapisan topcoat; basecoat 19674 + middle 19902ME + topcoat 606MH</div></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">606MH20</td><td style="padding:6px 10px">19–21% (1g/1h/180°C)</td><td style="padding:6px 10px">30–60 s/Cup4@30°C</td><td style="padding:6px 10px;color:#8a8d93">Topcoat standar</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">606MH30</td><td style="padding:6px 10px">28–30% (1g/1h/180°C)</td><td style="padding:6px 10px">3,000–5,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Topcoat solid tinggi</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">606MH36</td><td style="padding:6px 10px">35–37% (1g/1h/180°C)</td><td style="padding:6px 10px">5,000–8,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Topcoat solid sangat tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
+</details>
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">APAI 19672 Basecoat PAI Aromatik (Motor EV)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 220°C · Basecoat Motor EV · PAI Aromatik</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">PAI aromatik untuk pra-lapisan sebelum enamel standar, satu lapisan basecoat bisa meningkatkan adhesi enamel ke konduktor >10%, sangat direkomendasikan kawat datar besar</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Basecoat kawat bulat/datar besar motor penggerak EV</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Struktur aromatik memberikan ketahanan panas lebih tinggi; adhesi meningkat >10%; khusus motor EV</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Pra-lapisan basecoat (1 pass), diikuti middle coat 506/19902ME</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-1</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19672</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">506+19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">606MH</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+14+4+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Motor EV: adhesi tinggi, elastisitas tinggi, tahan abrasi</td></tr><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19674</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME+606WN</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19902ME</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">1+6+14+6</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Motor EV: tahan korona, adhesi baik</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19672-27</td><td style="padding:6px 10px">26–28% (1g/1h/180°C)</td><td style="padding:6px 10px">2,000–4,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat EV</td></tr><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19672-30</td><td style="padding:6px 10px">29–31% (1g/1h/180°C)</td><td style="padding:6px 10px">5,000–8,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Basecoat EV solid tinggi</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
+</details>
 </section><section id="s_PI" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px">
@@ -3379,6 +4086,32 @@ body.tab-guide .product-nav-id{display:none!important}
     </div>
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">① 3g 1h 180°C / mPa.s 20°C　② 1g 1h 180°C / DIN4 s 20°C</div>
   </div>
+</details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">PI 735OWR Poliimida Modified (Kelas 240°C)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 240°C · Basecoat/Topcoat Motor EV · PI Modified</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">PI modified, selain sifat PAI konvensional, tahan kimia (oli mesin, pelarut organik, air, asam, basa dll.), performa tetap baik pada suhu tinggi</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Motor EV (Skema EV-3): kelas termal tinggi, PDIV tinggi, tahan oli-air</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">TI 240°C sangat tinggi; PDIV tinggi tahan korona; ketahanan kimia komprehensif; tetap efektif pada suhu tinggi</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Basecoat sekaligus topcoat (EV-3: 735OWR base + 735CR middle, 4+12+4 pass)</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">EV-3</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">735OWR</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">735CR</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">735OWR</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">4+12+4</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">240</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Motor EV: kelas termal tinggi, PDIV tinggi, tahan oli-air</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">735OWR-25</td><td style="padding:6px 10px">24–26% (1g/1h/180°C)</td><td style="padding:6px 10px">1,000–2,000 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">PI basecoat/topcoat</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div><div style="margin:0 14px 14px;padding:10px 12px;background:rgba(232,75,75,.06);border-left:3px solid #e84b4b;border-radius:0 8px 8px 0;font-size:12px;color:#c08080;line-height:1.6">💡 Produk kelas termal tertinggi IVA (TI 240°C), Skema motor EV-3 (735OWR+735CR). Ketahanan kimia menjadikannya pilihan terbaik untuk lingkungan yang bersentuhan dengan oli mesin.</div>
+</div>
 </details>
 </section><section id="s_NY" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
@@ -3513,6 +4246,32 @@ body.tab-guide .product-nav-id{display:none!important}
     </div>
     <div style="font-size:10px;color:#8a8d93;margin-top:6px;line-height:1.6">Kondisi pengukuran viskositas: 200°C×2hr 1.5g / dPa.S at 30°C</div>
   </div>
+</details>
+
+<details class="vendor-iva" style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:3px solid #e84b4b">
+<summary style="padding:14px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+  <div>
+    <div style="font-size:14px;font-weight:500;color:#f0f0ee;margin-bottom:3px">19225 Self-Bonding Epoxy-Phenoxy (Kawat Transposisi CTC)<span style="display:inline-block;font-family:monospace;font-size:9px;font-weight:700;letter-spacing:.06em;padding:1px 7px;border-radius:10px;background:rgba(232,75,75,.15);border:1px solid rgba(232,75,75,.5);color:#e84b4b;margin-left:6px;vertical-align:middle">IVA</span></div>
+    <div style="font-size:11px;color:#8a8d93;font-family:monospace">TI 120°C · Self-Bonding Middle Coat · Epoxy-Phenoxy</div>
+  </div>
+  <span style="color:#8a8d93;font-size:18px;flex-shrink:0;margin-top:2px">›</span>
+</summary>
+<div style="padding:0 0 2px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 14px 12px"><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Deskripsi</div><div style="font-size:13px;line-height:1.55">Email self-bonding epoxy-phenoxy, kemampuan jalan baik, kekuatan bonding baik, suhu bonding 140–170°C, pelunakan 130–150°C, bisa dibakar satu oven dengan PVF 220GP</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Kegunaan</div><div style="font-size:13px;line-height:1.55">Kawat transposisi (CTC) trafo terendam minyak; kawat datar yang perlu self-bonding</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Keunggulan</div><div style="font-size:13px;line-height:1.55">Suhu bonding 140–170°C; bisa satu oven dengan basecoat PVF; pelunakan 130–150°C; celup metanol dapat melepas sifat perekat</div></div><div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Metode Aplikasi</div><div style="font-size:13px;line-height:1.55">Middle coat (Skema 5); basecoat 220GP + middle 19225, TI 120°C</div></div></div><div style="padding:0 14px 12px"><div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Skema Aplikasi</div><div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px"><table style="width:100%;border-collapse:collapse;min-width:500px"><thead><tr style="background:#1e2026"><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Solusi</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Base</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Middle</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Top</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Pass</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">TI</th><th style="padding:6px 8px;text-align:left;color:#8a8d93;white-space:nowrap;font-size:10px">Aplikasi</th></tr></thead><tbody><tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">5</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">220GP</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">19225</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">—</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">10+2</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">120</td><td style="padding:6px 8px;font-size:11px;color:#c8c9cc;font-family:monospace;white-space:nowrap">Trafo minyak terendam, Kawat Transposisi CTC</td></tr></tbody></table></div></div><div style="padding:0 14px 12px">
+<div style="font-size:10px;letter-spacing:.08em;color:#8a8d93;text-transform:uppercase;margin-bottom:7px;font-family:monospace">Spesifikasi Teknis</div>
+<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:9px">
+<table style="width:100%;border-collapse:collapse;font-size:11px;min-width:420px;font-family:monospace">
+<thead><tr style="background:#1e2026">
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Tipe</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Padatan (%)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Viskositas (mPa.s/20°C)</th>
+<th style="padding:7px 10px;text-align:left;color:#8a8d93">Keterangan</th>
+</tr></thead>
+<tbody style="background:#16181c"><tr><td style="color:#e84b4b;font-weight:500;padding:6px 10px">19225-22</td><td style="padding:6px 10px">21–23% (1g/1h/180°C)</td><td style="padding:6px 10px">3,000–4,500 mPa.s@20°C</td><td style="padding:6px 10px;color:#8a8d93">Self-bonding CTC</td></tr></tbody>
+</table></div>
+<div style="font-size:10px;color:#8a8d93;margin-top:5px">Viskositas: 1g-1h-180°C / mPa.s 20°C (atau yang ditentukan)</div>
+</div>
+</div>
 </details>
 </section><section id="s_PRIM" style="margin-bottom:32px">
   <div style="margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
@@ -3986,11 +4745,11 @@ function setLang(lang) {
 function setVendor(v) {
   _currentVendor = v;
   document.body.className = 'lang-' + _currentLang + ' show-' + v + ' tab-' + _currentTab;
-  var colors = {'all':'#c8a96e','elantas':'#4e9af1','totoku':'#f17c4e'};
-  var alphas = {'all':'rgba(200,169,110,.2)','elantas':'rgba(78,154,241,.2)','totoku':'rgba(241,124,78,.2)'};
-  var ids = ['vf-all','vf-elantas','vf-totoku'];
-  var idsid = ['vf-all-id','vf-elantas-id','vf-totoku-id'];
-  var keys = ['all','elantas','totoku'];
+  var colors = {'all':'#c8a96e','elantas':'#4e9af1','totoku':'#f17c4e','iva':'#e84b4b'};
+  var alphas = {'all':'rgba(200,169,110,.2)','elantas':'rgba(78,154,241,.2)','totoku':'rgba(241,124,78,.2)','iva':'rgba(232,75,75,.2)'};
+  var ids = ['vf-all','vf-elantas','vf-totoku','vf-iva'];
+  var idsid = ['vf-all-id','vf-elantas-id','vf-totoku-id','vf-iva-id'];
+  var keys = ['all','elantas','totoku','iva'];
   for (var i = 0; i < keys.length; i++) {
     var k = keys[i];
     var isActive = (k === v);
@@ -4008,12 +4767,8 @@ document.body.className = 'lang-zh show-all tab-catalog';
 </div><!-- /#main-content -->
 
 <script>
-// ── 密碼設定 ────────────────────────────────────
 var PASSWORDS = ['TCMW2026'];
-// ─────────────────────────────────────────────────
-
 sessionStorage.removeItem('elantas_auth');
-
 window.doLogin = function(){
   var val = document.getElementById('pw-input').value.trim();
   if(PASSWORDS.indexOf(val) !== -1){
