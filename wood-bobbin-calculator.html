@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東誠TCMW-Paper Bobin ｜ 木軸容量計算工具</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EDEFF1;
+    --panel:#FFFFFF;
+    --panel-2:#F5F6F8;
+    --ink:#1F2937;
+    --ink-soft:#5B6472;
+    --line:#DCE0E5;
+    --wood:#A9713F;
+    --wood-dark:#7A4F28;
+    --wood-tint:#F1E5D6;
+    --red:#D64545;
+    --red-tint:#FBEAEA;
+    --blue:#2563A5;
+    --blue-tint:#E9F1FA;
+    --purple:#7C4FA0;
+    --purple-tint:#F1E9F6;
+    --green:#2E8B57;
+    --green-tint:#E8F4EE;
+    --ok:#1E8E5A;
+    --ok-tint:#E5F5ED;
+    --bad:#C0392B;
+    --bad-tint:#FBEAE8;
+    --warn:#B8860B;
+    --warn-tint:#FBF3DC;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      linear-gradient(180deg, var(--wood-dark) 0px, var(--wood-dark) 6px, transparent 6px),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans TC', sans-serif;
+    padding-bottom:80px;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  .disp{font-family:'Oswald', 'Noto Sans TC', sans-serif;}
+
+  header.top{ max-width:1040px; margin:0 auto; padding:36px 20px 18px; }
+  .eyebrow{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Oswald', sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--wood-dark); margin-bottom:10px;
+  }
+  .eyebrow .chip{ background:var(--wood); color:#fff; padding:2px 9px; border-radius:5px; font-weight:600; letter-spacing:.08em; }
+  h1{ font-size:clamp(26px,4vw,38px); line-height:1.25; margin:0 0 6px; font-weight:900; }
+  h1 .id{color:var(--ink-soft); font-weight:500; font-size:.62em; display:block; margin-top:2px;}
+  .lede{ color:var(--ink-soft); font-size:15px; max-width:680px; line-height:1.7; margin-top:10px; }
+
+  main{max-width:1040px; margin:0 auto; padding:0 20px;}
+
+  section.card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 24px; margin-bottom:22px; box-shadow:0 1px 2px rgba(20,20,30,.03);
+  }
+  .card-head{ display:flex; align-items:baseline; gap:12px; margin-bottom:20px; border-bottom:1px solid var(--line); padding-bottom:14px; }
+  .card-head .num{
+    font-family:'Oswald',sans-serif; font-weight:700; font-size:14px; color:#fff; background:var(--wood);
+    width:26px;height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .card-head h2{ margin:0; font-size:19px; font-weight:700; }
+  .card-head .sub{ margin:0; font-size:13px; color:var(--ink-soft); font-weight:400; }
+
+  .grid{display:grid; gap:16px;}
+  .grid.cols-2{grid-template-columns:1fr 1fr;}
+  .grid.cols-3{grid-template-columns:1fr 1fr 1fr;}
+  @media (max-width:640px){ .grid.cols-2, .grid.cols-3{grid-template-columns:1fr;} }
+
+  label.field{display:block;}
+  label.field .lbl{ display:block; font-size:13.5px; font-weight:500; margin-bottom:6px; color:var(--ink); }
+  label.field .lbl .id-sub{ display:block; font-size:12px; color:var(--ink-soft); font-weight:400; font-style:italic; }
+  input[type=number], input[type=text], input[type=password], select{
+    width:100%; padding:10px 12px; font-size:15.5px; border-radius:9px;
+    border:1.5px solid var(--line); background:var(--panel-2); color:var(--ink);
+    font-family:'JetBrains Mono', monospace;
+  }
+  select{font-family:'Noto Sans TC', sans-serif;}
+  input:focus, select:focus{outline:2px solid var(--wood); border-color:var(--wood); background:#fff;}
+  input:disabled{opacity:.55; cursor:not-allowed;}
+
+  .accent-red{border-left:4px solid var(--red); padding-left:10px;}
+  .accent-blue{border-left:4px solid var(--blue); padding-left:10px;}
+  .accent-purple{border-left:4px solid var(--purple); padding-left:10px;}
+  .accent-green{border-left:4px solid var(--green); padding-left:10px;}
+
+  .material-toggle{display:flex; gap:10px;}
+  .material-toggle input{display:none;}
+  .material-toggle .opt{
+    flex:1; text-align:center; padding:11px 8px; border-radius:9px; border:1.5px solid var(--line);
+    cursor:pointer; font-weight:700; font-family:'Oswald',sans-serif; letter-spacing:.03em;
+    background:var(--panel-2); color:var(--ink-soft); transition:.15s;
+  }
+  .material-toggle input:checked + .opt{ background:var(--wood); color:#fff; border-color:var(--wood); }
+
+  table.layers{width:100%; border-collapse:collapse; margin-top:4px;}
+  table.layers th{ text-align:left; font-size:12px; color:var(--ink-soft); font-weight:500; padding:6px 8px; border-bottom:1px solid var(--line); }
+  table.layers td{padding:6px 8px;}
+  table.layers input{padding:8px 10px; font-size:14.5px;}
+  .btn{ border:none; cursor:pointer; font-family:'Noto Sans TC',sans-serif; font-weight:500; border-radius:8px; padding:9px 16px; font-size:14px; transition:.15s; }
+  .btn-add{background:var(--wood-tint); color:var(--wood-dark);}
+  .btn-add:hover{background:var(--wood); color:#fff;}
+  .btn-del{background:var(--bad-tint); color:var(--bad); padding:7px 10px;}
+  .btn-del:hover{background:var(--bad); color:#fff;}
+  .btn-main{background:var(--wood); color:#fff; font-weight:700; letter-spacing:.02em;}
+  .btn-main:hover{background:var(--wood-dark);}
+  .btn-ghost{background:transparent; color:var(--ink-soft); border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--wood); color:var(--wood-dark);}
+
+  .weight-row{display:flex; align-items:flex-end; gap:16px; margin-top:18px; flex-wrap:wrap;}
+  .weight-row .field{flex:1; min-width:200px;}
+
+  .result-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  @media (max-width:800px){.result-grid{grid-template-columns:repeat(2,1fr);}}
+  .result-tile{ background:var(--panel-2); border-radius:11px; padding:14px 16px; border:1px solid var(--line); }
+  .result-tile .rt-label{font-size:12px; color:var(--ink-soft); margin-bottom:6px; line-height:1.4;}
+  .result-tile .rt-value{font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--wood-dark);}
+  .result-tile .rt-unit{font-size:12px; color:var(--ink-soft); margin-left:3px;}
+
+  .diagram-wrap{ margin-bottom:22px; }
+  .diagram-wrap svg{ width:100%; height:auto; display:block; }
+  .legend{ display:flex; gap:22px; flex-wrap:wrap; margin-top:14px; }
+  .legend .li{display:flex; gap:9px; align-items:flex-start; font-size:13.5px; line-height:1.5; flex:1; min-width:180px;}
+  .legend .dot{width:12px; height:12px; border-radius:3px; margin-top:3px; flex-shrink:0;}
+  .legend b{display:block;}
+  .legend span.id{color:var(--ink-soft); font-size:12.5px; font-style:italic;}
+
+  .spool-table-wrap{overflow-x:auto;}
+  table.spools{width:100%; border-collapse:collapse; min-width:820px;}
+  table.spools th{ text-align:left; font-size:12px; font-weight:600; color:var(--ink-soft); padding:8px 10px; border-bottom:2px solid var(--line); white-space:nowrap; }
+  table.spools th .id-sub{display:block; font-weight:400; font-style:italic; font-size:11px;}
+  table.spools td{padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:middle;}
+  table.spools input{width:100px; padding:8px 9px; font-size:14px;}
+  table.spools input.name{width:130px; font-family:'Noto Sans TC',sans-serif;}
+  .auto-cell{font-family:'JetBrains Mono',monospace; font-size:13.5px; color:var(--ink-soft);}
+  .fit-badge{
+    display:inline-flex; align-items:center; gap:6px; padding:5px 12px; border-radius:20px;
+    font-weight:700; font-size:13px; font-family:'Oswald',sans-serif; letter-spacing:.02em;
+  }
+  .fit-yes{background:var(--ok-tint); color:var(--ok);}
+  .fit-warn{background:var(--warn-tint); color:var(--warn);}
+  .fit-no{background:var(--bad-tint); color:var(--bad);}
+  .usage-num{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:15px;}
+  .usage-bar{width:96px; height:8px; border-radius:4px; background:var(--line); overflow:hidden; margin-top:6px;}
+  .usage-bar > div{height:100%;}
+  .warn-line{font-size:11.5px; color:var(--warn); margin-top:4px; font-weight:500; max-width:160px; line-height:1.4;}
+
+  footer.note{ max-width:1040px; margin:0 auto; padding:10px 20px 40px; font-size:12.5px; color:var(--ink-soft); line-height:1.8; }
+  footer.note b{color:var(--ink);}
+
+  .toolbar{display:flex; justify-content:flex-end; gap:10px; margin-top:14px;}
+
+  /* admin lock */
+  .admin-box{
+    margin-top:22px; border-top:1px dashed var(--line); padding-top:16px;
+  }
+  .admin-toggle{
+    display:inline-flex; align-items:center; gap:8px; cursor:pointer; color:var(--ink-soft);
+    font-size:13px; font-weight:500; background:none; border:none; padding:4px 0;
+  }
+  .admin-toggle:hover{color:var(--wood-dark);}
+  .admin-panel{ display:none; margin-top:14px; background:var(--panel-2); border:1px dashed var(--line); border-radius:10px; padding:16px; }
+  .admin-panel.open{display:block;}
+  .admin-login-row{display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;}
+  .admin-login-row .field{max-width:220px;}
+  .readonly-const{
+    display:flex; gap:24px; flex-wrap:wrap; font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--ink-soft);
+  }
+  .readonly-const b{color:var(--ink); font-weight:700;}
+
+  /* ---- login gate ---- */
+  #loginGate{
+    position:fixed; inset:0; z-index:100;
+    background:
+      linear-gradient(180deg, var(--wood-dark) 0px, var(--wood-dark) 6px, transparent 6px),
+      var(--bg);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .login-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius);
+    padding:36px 32px; max-width:380px; width:100%; box-shadow:0 8px 30px rgba(20,20,30,.08);
+  }
+  .login-card .chip{
+    display:inline-block; background:var(--wood); color:#fff; padding:3px 10px; border-radius:5px;
+    font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:.08em; font-weight:600; margin-bottom:14px;
+  }
+  .login-card h2{margin:0 0 6px; font-size:22px; font-weight:900;}
+  .login-card p.sub{margin:0 0 22px; font-size:13px; color:var(--ink-soft); line-height:1.6;}
+  .login-card input[type=password]{margin-bottom:14px;}
+  .login-card .btn-main{width:100%; padding:12px; font-size:15px;}
+  #loginError{display:none; color:var(--bad); font-size:12.5px; margin:-6px 0 14px;}
+  .login-hint{font-size:11.5px; color:var(--ink-soft); margin-top:18px; line-height:1.6; border-top:1px dashed var(--line); padding-top:14px;}
+
+  #appRoot{display:none;}
+  .role-bar{
+    max-width:1040px; margin:0 auto; padding:10px 20px 0; display:flex; justify-content:flex-end;
+  }
+  .role-badge{
+    display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink-soft);
+    background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:6px 14px;
+  }
+  .role-badge b{color:var(--wood-dark);}
+  .role-badge button{
+    border:none; background:none; color:var(--ink-soft); text-decoration:underline; cursor:pointer; font-size:12.5px; padding:0;
+  }
+  .role-badge button:hover{color:var(--bad);}
+</style>
+</head>
+<body>
+
+<div id="loginGate">
+  <div class="login-card">
+    <span class="chip">東誠TCMW-Paper Bobin</span>
+    <h2>木軸容量計算工具</h2>
+    <p class="sub">請輸入登入密碼 / Silakan masukkan password login</p>
+    <input type="password" id="loginPass" placeholder="密碼 Password">
+    <p id="loginError">密碼錯誤，請重新輸入 / Password salah, coba lagi</p>
+    <button class="btn btn-main" id="loginBtn">登入 Login</button>
+    <p class="login-hint">員工請使用員工密碼登入；管理員密碼可額外解鎖係數與密碼設定。<br>Karyawan gunakan password karyawan; password admin membuka pengaturan konstanta &amp; password.</p>
+  </div>
+</div>
+
+<div id="appRoot">
+
+<div class="role-bar">
+  <div class="role-badge">
+    身份 Status：<b id="roleLabel">--</b>
+    <span>｜</span>
+    <button id="logoutBtn">登出 Logout</button>
+  </div>
+</div>
+
+<header class="top">
+  <div class="eyebrow"><span class="chip">東誠TCMW-Paper Bobin</span> 紙包扁線 · 木軸選配工具</div>
+  <h1>木軸容量計算工具<span class="id">Alat Hitung Kapasitas Gulungan Kayu Untuk Kawat Pipih Berlapis Kertas</span></h1>
+  <p class="lede">
+    輸入銅線/鋁線尺寸、包紙層數與總重量，系統自動算出包紙後總體積，並比對木軸是否裝得下、大概會裝幾分滿。<br>
+    Masukkan ukuran kawat Cu/Al, jumlah lapisan kertas, dan total berat — sistem otomatis menghitung volume setelah dibungkus kertas, membandingkan apakah muat di gulungan kayu, dan berapa persen penuhnya.
+  </p>
+</header>
+
+<main>
+
+  <!-- SECTION 1: WIRE SPEC -->
+  <section class="card">
+    <div class="card-head">
+      <div class="num">1</div>
+      <div>
+        <h2>線材規格 <span class="id-sub">Spesifikasi Kawat</span></h2>
+        <p class="sub">裸線（未包紙）的尺寸與材質 / Ukuran kawat telanjang (sebelum dibungkus) &amp; jenis bahan</p>
+      </div>
+    </div>
+
+    <div class="grid cols-3">
+      <div class="field">
+        <span class="lbl">材質<span class="id-sub">Jenis Bahan</span></span>
+        <div class="material-toggle">
+          <label><input type="radio" name="material" value="Cu" id="mat-cu" checked><div class="opt">Cu 銅 / Tembaga</div></label>
+          <label><input type="radio" name="material" value="Al" id="mat-al"><div class="opt">Al 鋁 / Aluminium</div></label>
+        </div>
+      </div>
+      <label class="field">
+        <span class="lbl">裸線厚度 T <span class="id-sub">Tebal Kawat Telanjang (mm)</span></span>
+        <input type="number" id="bareT" step="0.001" value="1.6">
+      </label>
+      <label class="field">
+        <span class="lbl">裸線寬度 L <span class="id-sub">Lebar Kawat Telanjang (mm)</span></span>
+        <input type="number" id="bareL" step="0.001" value="8.5">
+      </label>
+    </div>
+
+    <div style="margin-top:22px;">
+      <span class="lbl" style="margin-bottom:8px;">包紙層數設定 <span class="id-sub">Pengaturan Lapisan Kertas (setiap sisi terhitung otomatis x2)</span></span>
+      <table class="layers" id="layerTable">
+        <thead>
+          <tr>
+            <th style="width:36%">層數 PC <span class="id-sub">Jumlah Lapisan</span></th>
+            <th style="width:36%">紙厚度 mm <span class="id-sub">Tebal Kertas (mm)</span></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="layerBody"></tbody>
+      </table>
+      <div class="toolbar" style="justify-content:flex-start;">
+        <button class="btn btn-add" id="addLayerBtn">+ 新增一列 Tambah Baris</button>
+      </div>
+    </div>
+
+    <div class="weight-row">
+      <label class="field" style="max-width:260px;">
+        <span class="lbl">總重量 <span class="id-sub">Total Berat (kg)</span></span>
+        <input type="number" id="totalWeight" step="0.1" value="450">
+      </label>
+    </div>
+
+    <!-- ADMIN-ONLY MATERIAL CONSTANTS (only rendered/visible for admin role) -->
+    <div class="admin-box" id="adminBox" style="display:none;">
+      <button class="admin-toggle" id="adminToggle">🔒 管理員設定 Pengaturan Admin ▾</button>
+      <div class="admin-panel" id="adminPanel">
+        <p style="font-size:12.5px; color:var(--ink-soft); margin:0 0 14px;">
+          此區塊僅管理員登入後可見，一般員工不會看到。 / Bagian ini hanya terlihat setelah login sebagai admin, karyawan biasa tidak akan melihatnya.
+        </p>
+        <div class="grid cols-2">
+          <label class="field">
+            <span class="lbl" style="font-size:12px;">Cu 係數 <span class="id-sub">Konstanta Cu</span></span>
+            <input type="number" id="constCu" step="0.0001" value="0.0086">
+          </label>
+          <label class="field">
+            <span class="lbl" style="font-size:12px;">Al 係數 <span class="id-sub">Konstanta Al</span></span>
+            <input type="number" id="constAl" step="0.0001" value="0.002622">
+          </label>
+        </div>
+        <p style="font-size:12px; color:var(--ink-soft); margin-top:10px; line-height:1.7;">
+          預設 Al 係數 = Cu 係數 ÷ 3.28（鋁線體積約為銅線 3.28 倍） / Konstanta Al bawaan = Konstanta Cu ÷ 3.28 (volume aluminium ± 3.28x volume tembaga untuk berat sama).
+        </p>
+        <div class="admin-login-row" style="margin-top:20px; border-top:1px dashed var(--line); padding-top:16px;">
+          <label class="field">
+            <span class="lbl" style="font-size:12px;">修改一般員工登入密碼 <span class="id-sub">Ubah Password Login Karyawan</span></span>
+            <input type="text" id="newEmployeePass" placeholder="輸入新密碼 Password baru">
+          </label>
+          <button class="btn btn-main" id="updateEmployeePassBtn">更新 Update</button>
+        </div>
+        <p id="passUpdateMsg" style="display:none; color:var(--ok); font-size:12.5px; margin-top:8px;">✓ 已更新（僅本次瀏覽有效，重新整理頁面會恢復預設值，如需永久生效請直接修改檔案原始碼） Sudah diupdate (hanya berlaku sesi ini, refresh akan kembali ke default, untuk permanen ubah source code file)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: RESULTS -->
+  <section class="card">
+    <div class="card-head">
+      <div class="num">2</div>
+      <div>
+        <h2>計算結果 <span class="id-sub">Hasil Perhitungan</span></h2>
+        <p class="sub">自動計算，隨輸入即時更新 / Terhitung otomatis, terupdate langsung saat input diubah</p>
+      </div>
+    </div>
+    <div class="result-grid">
+      <div class="result-tile">
+        <div class="rt-label">包紙後增加尺寸(雙邊)<br>Penambahan Ukuran (2 sisi)</div>
+        <div class="rt-value" id="out-paperAdd">--<span class="rt-unit">mm</span></div>
+      </div>
+      <div class="result-tile">
+        <div class="rt-label">完成尺寸 T x L<br>Ukuran Jadi T x L</div>
+        <div class="rt-value" id="out-finished">--<span class="rt-unit">mm</span></div>
+      </div>
+      <div class="result-tile">
+        <div class="rt-label">總長度<br>Total Panjang</div>
+        <div class="rt-value" id="out-length">--<span class="rt-unit">m</span></div>
+      </div>
+      <div class="result-tile">
+        <div class="rt-label">包紙後總體積<br>Total Volume Setelah Dibungkus</div>
+        <div class="rt-value" id="out-volume">--<span class="rt-unit">cm³</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: SPOOLS -->
+  <section class="card">
+    <div class="card-head">
+      <div class="num">3</div>
+      <div>
+        <h2>木軸資訊比對 <span class="id-sub">Perbandingan Gulungan Kayu</span></h2>
+        <p class="sub">只需填 3 個尺寸即可查詢是否裝得下 / Cukup isi 3 ukuran untuk cek apakah muat</p>
+      </div>
+    </div>
+
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrowRed" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#D64545"/>
+          </marker>
+          <marker id="arrowGreen" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2E8B57"/>
+          </marker>
+          <marker id="arrowPurple" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#7C4FA0"/>
+          </marker>
+          <marker id="arrowBlue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2563A5"/>
+          </marker>
+          <pattern id="woodHatch" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect width="8" height="8" fill="#F1E5D6"/>
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#D9C1A0" stroke-width="3"/>
+          </pattern>
+        </defs>
+
+        <!-- FRONT VIEW -->
+        <g transform="translate(160,150)">
+          <circle r="112" fill="url(#woodHatch)" stroke="#7A4F28" stroke-width="3"/>
+          <circle r="52" fill="#fff" stroke="#2563A5" stroke-width="2.5" stroke-dasharray="6 5"/>
+          <circle r="7" fill="#7A4F28"/>
+          <line x1="-112" y1="0" x2="112" y2="0" stroke="#D64545" stroke-width="2.5" marker-start="url(#arrowRed)" marker-end="url(#arrowRed)"/>
+          <text x="0" y="150" text-anchor="middle" fill="#D64545" font-size="16" font-weight="700" font-family="Noto Sans TC, sans-serif">木軸直徑</text>
+          <text x="0" y="170" text-anchor="middle" fill="#D64545" font-size="12" font-style="italic" font-family="Noto Sans TC, sans-serif">Diameter Luar</text>
+          <text x="0" y="-125" text-anchor="middle" fill="#5B6472" font-size="11" font-family="Noto Sans TC, sans-serif">正面圖 Tampak Depan</text>
+        </g>
+
+        <!-- SIDE / CROSS-SECTION VIEW -->
+        <g transform="translate(500,150)">
+          <!-- outer flange faint circle for scale ref -->
+          <rect x="-150" y="-112" width="300" height="224" fill="none"/>
+          <!-- left flange -->
+          <rect x="-150" y="-112" width="26" height="224" fill="url(#woodHatch)" stroke="#7A4F28" stroke-width="2.5"/>
+          <!-- right flange -->
+          <rect x="124" y="-112" width="26" height="224" fill="url(#woodHatch)" stroke="#7A4F28" stroke-width="2.5"/>
+          <!-- core rod -->
+          <rect x="-124" y="-16" width="248" height="32" fill="#D9C1A0" stroke="#7A4F28" stroke-width="1.5"/>
+          <!-- wound wire band top -->
+          <rect x="-124" y="-72" width="248" height="56" fill="#E8F4EE" stroke="#2E8B57" stroke-width="2"/>
+          <!-- wound wire band bottom -->
+          <rect x="-124" y="16" width="248" height="56" fill="#E8F4EE" stroke="#2E8B57" stroke-width="2"/>
+
+          <!-- depth arrow (green) on right side, from flange inner edge to core edge -->
+          <line x1="150" y1="-70" x2="150" y2="-16" stroke="#2E8B57" stroke-width="2.5" marker-start="url(#arrowGreen)" marker-end="url(#arrowGreen)"/>
+          <text x="160" y="-38" fill="#2E8B57" font-size="14" font-weight="700" font-family="Noto Sans TC, sans-serif">內軸深度</text>
+          <text x="160" y="-22" fill="#2E8B57" font-size="11" font-style="italic" font-family="Noto Sans TC, sans-serif">Kedalaman</text>
+
+          <!-- width arrow (purple) along bottom, between flanges -->
+          <line x1="-124" y1="112" x2="124" y2="112" stroke="#7C4FA0" stroke-width="2.5" marker-start="url(#arrowPurple)" marker-end="url(#arrowPurple)"/>
+          <text x="0" y="140" text-anchor="middle" fill="#7C4FA0" font-size="15" font-weight="700" font-family="Noto Sans TC, sans-serif">內徑寬度</text>
+          <text x="0" y="158" text-anchor="middle" fill="#7C4FA0" font-size="11" font-style="italic" font-family="Noto Sans TC, sans-serif">Lebar Dalam</text>
+
+          <text x="0" y="-136" text-anchor="middle" fill="#5B6472" font-size="11" font-family="Noto Sans TC, sans-serif">側面剖面圖 Tampak Samping (Potongan)</text>
+
+          <!-- axle diameter callout (blue), pointing to core rod -->
+          <line x1="0" y1="-16" x2="0" y2="-40" stroke="#2563A5" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <text x="0" y="-50" text-anchor="middle" fill="#2563A5" font-size="10.5" font-style="italic" font-family="Noto Sans TC, sans-serif">軸心 (自動計算) Poros (otomatis)</text>
+        </g>
+      </svg>
+
+      <div class="legend">
+        <div class="li"><span class="dot" style="background:var(--red)"></span><div><b>木軸直徑 <span class="id">Diameter Luar</span></b><span class="id">木軸最外側整體直徑 / Diameter terluar keseluruhan gulungan</span></div></div>
+        <div class="li"><span class="dot" style="background:var(--green)"></span><div><b>內軸深度 <span class="id">Kedalaman</span></b><span class="id">從外緣往軸心方向的繞線厚度 / Ketebalan gulungan dari sisi luar ke poros</span></div></div>
+        <div class="li"><span class="dot" style="background:var(--purple)"></span><div><b>內徑寬度 <span class="id">Lebar Dalam</span></b><span class="id">兩片木軸板之間可繞線的軸向寬度 / Lebar aksial antara dua sisi papan gulungan</span></div></div>
+        <div class="li"><span class="dot" style="background:var(--blue)"></span><div><b>軸心 (自動) <span class="id">Poros (Otomatis)</span></b><span class="id">= 木軸直徑 − 內軸深度×2，系統自動算出 / = Diameter Luar − Kedalaman×2, dihitung otomatis</span></div></div>
+      </div>
+    </div>
+
+    <div class="spool-table-wrap">
+      <table class="spools">
+        <thead>
+          <tr>
+            <th>木軸名稱<span class="id-sub">Nama</span></th>
+            <th class="accent-red">木軸直徑 cm<span class="id-sub">Diameter Luar</span></th>
+            <th class="accent-green">內軸深度 cm<span class="id-sub">Kedalaman</span></th>
+            <th class="accent-purple">內徑寬度 cm<span class="id-sub">Lebar Dalam</span></th>
+            <th>容量 cm³<span class="id-sub">Kapasitas</span></th>
+            <th>是否可裝<span class="id-sub">Muat?</span></th>
+            <th>裝滿百分比<span class="id-sub">Persentase Penuh</span></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="spoolBody"></tbody>
+      </table>
+    </div>
+    <div class="toolbar">
+      <button class="btn btn-add" id="addSpoolBtn">+ 新增木軸 Tambah Gulungan</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="note">
+  <b>計算公式說明 / Catatan Rumus：</b><br>
+  總長度(m) = 總重量(kg) ÷ [裸線厚度(mm) × 裸線寬度(mm) × 材質係數]　Panjang(m) = Berat(kg) ÷ [Tebal(mm) × Lebar(mm) × Konstanta Bahan]<br>
+  包紙後總體積(cm³) = 完成厚度(cm) × 完成寬度(cm) × 總長度(cm)　Volume(cm³) = Tebal Jadi(cm) × Lebar Jadi(cm) × Panjang(cm)<br>
+  軸心直徑 = 木軸直徑 − 內軸深度×2　Diameter Poros = Diameter Luar − Kedalaman×2<br>
+  木軸容量(cm³) = 內軸深度(cm) × 內徑寬度(cm) × π × 軸心直徑(cm)　Kapasitas(cm³) = Kedalaman(cm) × Lebar Dalam(cm) × π × Diameter Poros(cm)<br>
+  裝滿百分比 = 包紙後總體積 ÷ 木軸容量 × 100%，超過 90% 會提醒是否需要更大的木軸。　Persentase Penuh = Volume ÷ Kapasitas × 100%, jika lebih dari 90% akan ada peringatan untuk mencari gulungan lebih besar.
+</footer>
+
+</div><!-- /#appRoot -->
+
+<script>
+// ====== 帳號密碼設定 / Pengaturan Password ======
+// 若要永久修改密碼，請直接修改下方兩行文字後重新部署此檔案。
+// Untuk mengubah password secara permanen, edit dua baris di bawah ini lalu deploy ulang file.
+const ADMIN_PASSWORD = "TCMW@cody202688";     // 管理員密碼 / Password admin (tetap, tidak bisa diubah dari UI)
+let EMPLOYEE_PASSWORD = "TCMW2026";           // 一般員工密碼 / Password karyawan biasa (bisa diubah admin, hanya berlaku sesi ini)
+
+const state = {
+  layers: [ {count:9, thick:0.075}, {count:1, thick:0.05} ],
+  spools: [],
+  constCu: 0.0086,
+  constAl: 0.002622,
+  role: null,
+};
+
+function fmt(n, d=2){
+  if(!isFinite(n)) return '--';
+  return n.toLocaleString('en-US', {minimumFractionDigits:d, maximumFractionDigits:d});
+}
+
+function renderLayers(){
+  const body = document.getElementById('layerBody');
+  body.innerHTML = '';
+  state.layers.forEach((row, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input type="number" step="1" min="0" value="${row.count}" data-i="${i}" data-f="count"></td>
+      <td><input type="number" step="0.001" min="0" value="${row.thick}" data-i="${i}" data-f="thick"></td>
+      <td><button class="btn btn-del" data-del="${i}">✕</button></td>
+    `;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('input', e=>{
+      const i = +e.target.dataset.i, f = e.target.dataset.f;
+      state.layers[i][f] = parseFloat(e.target.value) || 0;
+      calcAll();
+    });
+  });
+  body.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      const i = +e.target.dataset.del;
+      if(state.layers.length <= 1) return;
+      state.layers.splice(i,1);
+      renderLayers();
+      calcAll();
+    });
+  });
+}
+
+document.getElementById('addLayerBtn').addEventListener('click', ()=>{
+  state.layers.push({count:1, thick:0.075});
+  renderLayers();
+  calcAll();
+});
+
+function renderSpools(){
+  const body = document.getElementById('spoolBody');
+  body.innerHTML = '';
+  state.spools.forEach((s, i)=>{
+    const tr = document.createElement('tr');
+    tr.dataset.row = i;
+    tr.innerHTML = `
+      <td><input class="name" type="text" value="${s.name}" data-i="${i}" data-f="name"></td>
+      <td><input type="number" step="1" value="${s.diaOuter}" data-i="${i}" data-f="diaOuter"></td>
+      <td><input type="number" step="1" value="${s.depth}" data-i="${i}" data-f="depth"></td>
+      <td><input type="number" step="1" value="${s.width}" data-i="${i}" data-f="width"></td>
+      <td class="auto-cell" data-out="capacity">--</td>
+      <td data-out="fit">--</td>
+      <td data-out="usage">--</td>
+      <td><button class="btn btn-del" data-delspool="${i}">✕</button></td>
+    `;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('input', e=>{
+      const i = +e.target.dataset.i, f = e.target.dataset.f;
+      state.spools[i][f] = (f==='name') ? e.target.value : (parseFloat(e.target.value)||0);
+      calcAll();
+    });
+  });
+  body.querySelectorAll('[data-delspool]').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      const i = +e.target.dataset.delspool;
+      state.spools.splice(i,1);
+      renderSpools();
+      calcAll();
+    });
+  });
+}
+
+document.getElementById('addSpoolBtn').addEventListener('click', ()=>{
+  state.spools.push({name:'木軸 '+(state.spools.length+1), diaOuter:110, depth:20, width:30});
+  renderSpools();
+  calcAll();
+});
+
+function calcAll(){
+  const material = document.querySelector('input[name=material]:checked').value;
+  const bareT = parseFloat(document.getElementById('bareT').value) || 0;
+  const bareL = parseFloat(document.getElementById('bareL').value) || 0;
+  const weight = parseFloat(document.getElementById('totalWeight').value) || 0;
+  const k = material === 'Cu' ? state.constCu : state.constAl;
+
+  const paperAdd = 2 * state.layers.reduce((sum,row)=> sum + (row.count * row.thick), 0);
+  const finishedT = bareT + paperAdd;
+  const finishedL = bareL + paperAdd;
+
+  const lengthM = (bareT>0 && bareL>0 && k>0) ? weight / (bareT * bareL * k) : 0;
+  const lengthCm = lengthM * 100;
+  const volumeCm3 = (finishedT/10) * (finishedL/10) * lengthCm;
+
+  document.getElementById('out-paperAdd').innerHTML = fmt(paperAdd,3) + '<span class="rt-unit">mm</span>';
+  document.getElementById('out-finished').innerHTML = fmt(finishedT,3) + ' x ' + fmt(finishedL,3) + '<span class="rt-unit">mm</span>';
+  document.getElementById('out-length').innerHTML = fmt(lengthM,1) + '<span class="rt-unit">m</span>';
+  document.getElementById('out-volume').innerHTML = fmt(volumeCm3,1) + '<span class="rt-unit">cm³</span>';
+
+  const body = document.getElementById('spoolBody');
+  state.spools.forEach((s, i)=>{
+    const diaInner = s.diaOuter - (s.depth*2);
+    const capacity = diaInner>0 ? s.depth * s.width * Math.PI * diaInner : 0;
+    const usage = (volumeCm3>0 && capacity>0) ? (volumeCm3/capacity*100) : 0;
+    const fits = capacity >= volumeCm3 && volumeCm3>0;
+
+    const tr = body.querySelector(`tr[data-row="${i}"]`);
+    if(!tr) return;
+    tr.querySelector('[data-out="capacity"]').textContent = diaInner>0 ? fmt(capacity,1) : '⚠ 深度過大';
+
+    const fitCell = tr.querySelector('[data-out="fit"]');
+    fitCell.innerHTML = diaInner<=0 ? '' : (fits
+      ? `<span class="fit-badge fit-yes">✓ 可裝 Muat</span>`
+      : `<span class="fit-badge fit-no">✕ 裝不下 Tidak Muat</span>`);
+
+    const usageCell = tr.querySelector('[data-out="usage"]');
+    if(diaInner<=0){
+      usageCell.innerHTML = '--';
+    } else {
+      const usagePctDisplay = Math.min(usage, 999);
+      let barColor = 'var(--ok)';
+      let warnHtml = '';
+      if(usage > 100){
+        barColor = 'var(--bad)';
+      } else if(usage > 90){
+        barColor = 'var(--warn)';
+        warnHtml = `<div class="warn-line">⚠ 已超過90%，建議找更大的木軸 / Sudah lebih 90%, cari gulungan lebih besar</div>`;
+      } else {
+        barColor = 'var(--ok)';
+      }
+      usageCell.innerHTML = `<span class="usage-num" style="color:${barColor}">${fmt(usagePctDisplay,1)}%</span>
+        <div class="usage-bar"><div style="width:${Math.min(usage,100)}%; background:${barColor}"></div></div>
+        ${warnHtml}`;
+    }
+  });
+}
+
+document.querySelectorAll('input[name=material]').forEach(r=> r.addEventListener('change', calcAll));
+['bareT','bareL','totalWeight'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', calcAll);
+});
+
+// --- Admin panel collapse toggle ---
+const adminToggle = document.getElementById('adminToggle');
+const adminPanel = document.getElementById('adminPanel');
+adminToggle.addEventListener('click', ()=>{
+  adminPanel.classList.toggle('open');
+});
+
+document.getElementById('constCu').addEventListener('input', e=>{
+  state.constCu = parseFloat(e.target.value) || 0.0086;
+  calcAll();
+});
+document.getElementById('constAl').addEventListener('input', e=>{
+  state.constAl = parseFloat(e.target.value) || 0.002622;
+  calcAll();
+});
+
+document.getElementById('updateEmployeePassBtn').addEventListener('click', ()=>{
+  const newPass = document.getElementById('newEmployeePass').value.trim();
+  if(newPass.length < 4){ return; }
+  EMPLOYEE_PASSWORD = newPass;
+  document.getElementById('passUpdateMsg').style.display = 'block';
+  document.getElementById('newEmployeePass').value = '';
+});
+
+// --- Login gate logic ---
+function doLogin(){
+  const pass = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginError');
+  if(pass === ADMIN_PASSWORD){
+    state.role = 'admin';
+  } else if(pass === EMPLOYEE_PASSWORD){
+    state.role = 'employee';
+  } else {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+  document.getElementById('loginGate').style.display = 'none';
+  document.getElementById('appRoot').style.display = 'block';
+  document.getElementById('adminBox').style.display = (state.role === 'admin') ? 'block' : 'none';
+  document.getElementById('roleLabel').textContent = (state.role === 'admin') ? '管理員 Admin' : '員工 Karyawan';
+}
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+document.getElementById('loginPass').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') doLogin();
+});
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  state.role = null;
+  document.getElementById('loginPass').value = '';
+  document.getElementById('appRoot').style.display = 'none';
+  document.getElementById('loginGate').style.display = 'flex';
+});
+
+// init
+renderLayers();
+state.spools.push({name:'範例木軸 Contoh', diaOuter:110, depth:20, width:30});
+renderSpools();
+calcAll();
+</script>
+
+</body>
+</html>
