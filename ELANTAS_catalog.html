@@ -41,11 +41,17 @@ body.show-all .vendor-elantas,body.show-all .vendor-totoku,body.show-all .vendor
 /* Page tab system */
 .page-catalog{display:block}
 .page-guide{display:none}
+.page-paper{display:none}
 body.tab-guide .page-catalog{display:none}
 body.tab-guide .page-guide{display:block}
 body.tab-guide .vendor-filter-bar{display:none!important}
 body.tab-guide .product-nav-zh{display:none!important}
 body.tab-guide .product-nav-id{display:none!important}
+body.tab-paper .page-catalog{display:none}
+body.tab-paper .page-paper{display:block}
+body.tab-paper .vendor-filter-bar{display:none!important}
+body.tab-paper .product-nav-zh{display:none!important}
+body.tab-paper .product-nav-id{display:none!important}
 </style>
 </head>
 <body class="lang-zh show-all tab-catalog">
@@ -85,6 +91,11 @@ body.tab-guide .product-nav-id{display:none!important}
         style="padding:5px 16px;font-size:12px;font-family:-apple-system,sans-serif;border:none;cursor:pointer;background:transparent;color:#8a8d93;transition:all .2s;white-space:nowrap">
         <span class="zh-only">📖 漆種入門</span>
         <span class="id-only">📖 Panduan Enamel</span>
+      </button>
+      <button id="tab-btn-paper" onclick="setTab('paper')"
+        style="padding:5px 16px;font-size:12px;font-family:-apple-system,sans-serif;border:none;cursor:pointer;background:transparent;color:#8a8d93;transition:all .2s;white-space:nowrap">
+        <span class="zh-only">📄 絕緣紙入門</span>
+        <span class="id-only">📄 Panduan Kertas Isolasi</span>
       </button>
     </div>
 
@@ -4578,6 +4589,78 @@ body.tab-guide .product-nav-id{display:none!important}
 <div style="margin-top:10px;font-size:12px;color:#6a6d73;line-height:1.6">※ TI 值是指漆包線在此溫度下<strong style="color:#8a8d93">長期使用（20,000小時）</strong>仍能維持50%以上絕緣壽命的溫度。實際選漆時應以客戶指定的電機絕緣等級（Insulation Class）為依據，並留出10–20°C安全裕量。</div>
 </div>
 </section>
+<section id="s_PAPER" style="margin-bottom:32px">
+  <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:18px;font-weight:500;color:#f0f0ee">紙包線、絕緣紙與Kapton補充知識</span>
+      <span style="font-family:monospace;font-size:11px;padding:3px 10px;border-radius:14px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);color:#c8a96e">採購知識</span>
+    </div>
+    <div style="font-size:13px;color:#8a8d93;margin-top:6px">漆包線 vs 紙包線 · 絕緣紙密度分類 · 一般紙與TUP耐熱紙 · Kapton聚醯亞胺膠帶</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(200,169,110,.2);border-radius:14px;padding:18px 20px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#c8a96e;text-transform:uppercase;margin-bottom:10px">漆包線 vs 紙包線：本質差異</div>
+    <p style="font-size:14px;line-height:1.8;color:#d4d4d2;margin-bottom:10px">漆包線和紙包線是變壓器繞組系統裡兩套不同邏輯的絕緣方案。差異的核心在於<strong style="color:#f0f0ee">絕緣介質</strong>和<strong style="color:#f0f0ee">散熱冷卻方式</strong>：漆包線靠塗覆的漆膜絕緣，主要用於乾式系統；紙包線靠纏繞的紙，但乾燥時介電強度並不突出，必須經<strong style="color:#f0f0ee">變壓器油浸漬</strong>後才發揮絕緣與散熱效果，形成「油紙絕緣系統」。</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#6bcb77;font-weight:600;margin-bottom:4px">🧵 絕緣介質</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">漆包線＝烘烤固化漆膜；紙包線＝纏繞紙＋變壓器油浸漬</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#4ecdc4;font-weight:600;margin-bottom:4px">❄️ 散熱方式</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">漆包線靠空氣對流或環氧真空浸漬(VPI)；紙包線靠油對流帶熱至散熱片</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#f4a535;font-weight:600;margin-bottom:4px">🏭 適用系統</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">漆包線→乾式變壓器、馬達；紙包線→油浸式變壓器主繞組</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#a78bfa;font-weight:600;margin-bottom:4px">📉 老化監測</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">紙包線系統可用DP聚合度、2-FAL追蹤老化；漆包線無此套系統</div></div>
+    </div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">耐熱等級對照 — 漆包線 vs 紙包線</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">紙包線材料</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">熱點溫度限制</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">對應漆包線等級</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">一般牛皮紙 Kraft（未改質）</td><td style="padding:8px 12px;color:#a0a0a0">95~105°C</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">約等同 PVF 低標區間</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">TUP 耐熱溫升紙（含氮處理）</td><td style="padding:8px 12px;color:#a0a0a0">110~120°C</td><td style="padding:8px 12px;font-family:monospace;color:#f4a535">接近 PVF~EI 之間</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Nomex / 芳綸紙</td><td style="padding:8px 12px;color:#a0a0a0">180°C 以上</td><td style="padding:8px 12px;font-family:monospace;color:#e85d5d">對應 AI 甚至更高</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 紙的耐熱等級不能只看紙本身：油浸變壓器整體壽命由「油＋紙」共同決定，油的氧化安定性、含水量控制、密封系統設計都會限制紙能否真正發揮TUP耐熱優勢。</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">絕緣紙密度分類 — LD / MD / HD</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">類別</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">密度範圍(g/cm³)</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">全名</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">特點與用途</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#6bcb77">LD</td><td style="padding:8px 12px;color:#a0a0a0">0.60–0.80</td><td style="padding:8px 12px;color:#f0f0ee">Low Density 低密度</td><td style="padding:8px 12px;color:#a0a0a0">高吸油性、柔軟，適合形狀複雜零件或油隙墊片</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#f4a535">MD</td><td style="padding:8px 12px;color:#a0a0a0">0.85–1.00</td><td style="padding:8px 12px;color:#f0f0ee">Medium Density 中密度</td><td style="padding:8px 12px;color:#a0a0a0">平衡型，變壓器最通用類型，常用於層間絕緣</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#e85d5d">HD</td><td style="padding:8px 12px;color:#a0a0a0">1.10–1.30</td><td style="padding:8px 12px;color:#f0f0ee">High Density 高密度</td><td style="padding:8px 12px;color:#a0a0a0">高強度硬度大，用於導線外層包紮，抵抗短路機械應力</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 採購核對重點：內部標示「高密度」的品項，務必核對實測密度值是否真的落在1.10–1.30區間，避免與MD中密度混淆而造成規格認知落差。</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+      <span style="font-family:monospace;font-size:13px;font-weight:700;color:#c8a96e;background:rgba(0,0,0,.3);border:1px solid #c8a96e;border-radius:7px;padding:2px 10px">PI</span>
+      <span style="font-size:16px;font-weight:500;color:#f0f0ee">Kapton 聚醯亞胺膠帶</span>
+      <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">材質：Polyimide Film</span>
+      <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">DuPont商標</span>
+      <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">H級 180–220°C</span>
+    </div>
+    <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">「Kapton」是杜邦（DuPont）的商標名稱，正式材質是<strong style="color:#f0f0ee">聚醯亞胺薄膜（Polyimide Film）</strong>，業界也俗稱「PI膠帶」。呈現特有的琥珀色/金黃色半透明外觀，黏著劑通常是耐高溫的矽利康膠。與PI漆包線（TI 240°C）屬同一化學家族，但形態是膠帶而非液態漆。</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">主要特性</div><div style="font-size:13px;line-height:1.6">耐熱H級以上；瞬間可承受400°C以上不熔化；介電強度高；耐溶劑、耐油、抗輻射</div></div>
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">典型角色</div><div style="font-size:13px;line-height:1.6">局部補強、接頭包紮、槽絕緣襯墊；不做主體繞組絕緣（那是漆包線/紙包線的角色）</div></div>
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.6">馬達/發電機槽絕緣；乾式變壓器高溫繞組補強；漆包線接頭補強；高溫電纜、感應加熱線圈</div></div>
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">與漆包線對照</div><div style="font-size:13px;line-height:1.6">耐熱等級對應AI（H級220°C），瞬間耐溫表現優於TUP紙（110-120°C）與Nomex紙（180°C）</div></div>
+    </div>
+    <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">馬達槽絕緣</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">線圈端部包紮</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">乾式變壓器繞組補強</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">接頭絕緣加強</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">感應加熱線圈</span>
+    </div>
+    <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 業務對客戶說明時的口訣：<strong style="color:#c8a96e">乾式系統（含樹脂封裝或空氣冷卻）→漆包線當家；油浸式系統→紙包線＋油共同組成絕緣；局部補強、接頭包紮→Kapton膠帶</strong>。三者是互補而非替代關係。完整的絕緣紙介紹（一般紙/TUP/Nomex/密度分類）請見上方「📄 絕緣紙入門」頁籤。</div>
+  </div>
+</section>
+
   </div>
 
   <!-- Guide ID -->
@@ -4695,11 +4778,447 @@ body.tab-guide .product-nav-id{display:none!important}
 <div style="margin-top:10px;font-size:12px;color:#6a6d73;line-height:1.6">※ Nilai TI adalah suhu di mana kawat email masih mempertahankan lebih dari 50% masa pakai insulasi setelah <strong style="color:#8a8d93">penggunaan jangka panjang (20.000 jam)</strong>. Dalam pemilihan enamel aktual, gunakan kelas insulasi motor yang ditentukan pelanggan (Insulation Class) sebagai acuan, dan sediakan margin keamanan 10–20°C.</div>
 </div>
 </section>
+<section id="s_PAPER" style="margin-bottom:32px">
+  <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:18px;font-weight:500;color:#f0f0ee">Pengetahuan Tambahan: Kawat Kertas, Kertas Isolasi & Kapton</span>
+      <span style="font-family:monospace;font-size:11px;padding:3px 10px;border-radius:14px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);color:#c8a96e">Pengetahuan Pembelian</span>
+    </div>
+    <div style="font-size:13px;color:#8a8d93;margin-top:6px">Email vs Kawat Kertas · Klasifikasi Densitas Kertas · Kertas Biasa vs TUP · Selotip Kapton</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(200,169,110,.2);border-radius:14px;padding:18px 20px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#c8a96e;text-transform:uppercase;margin-bottom:10px">Email vs Kawat Berlapis Kertas: Perbedaan Mendasar</div>
+    <p style="font-size:14px;line-height:1.8;color:#d4d4d2;margin-bottom:10px">Kawat email dan kawat berlapis kertas adalah dua solusi isolasi dengan logika berbeda dalam sistem kumparan transformator. Perbedaan intinya terletak pada <strong style="color:#f0f0ee">media isolasi</strong> dan <strong style="color:#f0f0ee">metode pendinginan</strong>: kawat email diisolasi oleh lapisan pernis yang dikeringkan, terutama untuk sistem kering; kawat berlapis kertas diisolasi oleh kertas yang dililitkan, namun kekuatan dielektriknya rendah saat kering—harus direndam dalam <strong style="color:#f0f0ee">minyak transformator</strong> agar isolasi dan pendinginan efektif, membentuk "sistem isolasi minyak-kertas".</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#6bcb77;font-weight:600;margin-bottom:4px">🧵 Media Isolasi</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Email = lapisan pernis dibakar; Kawat kertas = kertas + rendaman minyak trafo</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#4ecdc4;font-weight:600;margin-bottom:4px">❄️ Metode Pendinginan</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Email: konveksi udara atau VPI epoksi; Kawat kertas: minyak mengalir membawa panas</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#f4a535;font-weight:600;margin-bottom:4px">🏭 Sistem Aplikasi</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Email→trafo kering, motor; Kawat kertas→kumparan utama trafo rendam-minyak</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#a78bfa;font-weight:600;margin-bottom:4px">📉 Pemantauan Penuaan</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Sistem kertas bisa dilacak dengan DP/2-FAL; email tidak punya sistem ini</div></div>
+    </div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">Perbandingan Kelas Termal — Email vs Kawat Kertas</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Material Kertas</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Batas Suhu Hot-Spot</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Setara Kelas Email</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Kertas Kraft biasa (tanpa modifikasi)</td><td style="padding:8px 12px;color:#a0a0a0">95~105°C</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">Mendekati batas bawah PVF</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Kertas TUP (proses nitrogen)</td><td style="padding:8px 12px;color:#a0a0a0">110~120°C</td><td style="padding:8px 12px;font-family:monospace;color:#f4a535">Mendekati antara PVF dan EI</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Nomex / Kertas Aramid</td><td style="padding:8px 12px;color:#a0a0a0">180°C ke atas</td><td style="padding:8px 12px;font-family:monospace;color:#e85d5d">Setara AI atau lebih tinggi</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 Kelas panas kertas tidak bisa dilihat dari kertas saja: umur trafo rendam-minyak ditentukan bersama oleh "minyak + kertas". Stabilitas oksidasi minyak, kontrol kadar air, dan desain sistem penyegelan membatasi apakah keunggulan panas TUP benar-benar tercapai.</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">Klasifikasi Densitas Kertas Isolasi — LD / MD / HD</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Kategori</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Rentang Densitas (g/cm³)</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Nama Lengkap</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Karakteristik & Kegunaan</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#6bcb77">LD</td><td style="padding:8px 12px;color:#a0a0a0">0.60–0.80</td><td style="padding:8px 12px;color:#f0f0ee">Low Density</td><td style="padding:8px 12px;color:#a0a0a0">Penyerapan minyak tinggi, lentur, cocok untuk komponen berbentuk rumit atau spacer celah minyak</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#f4a535">MD</td><td style="padding:8px 12px;color:#a0a0a0">0.85–1.00</td><td style="padding:8px 12px;color:#f0f0ee">Medium Density</td><td style="padding:8px 12px;color:#a0a0a0">Tipe seimbang, jenis paling umum di trafo, biasa untuk isolasi antar-lilitan</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#e85d5d">HD</td><td style="padding:8px 12px;color:#a0a0a0">1.10–1.30</td><td style="padding:8px 12px;color:#f0f0ee">High Density</td><td style="padding:8px 12px;color:#a0a0a0">Kekuatan & kekerasan tinggi, untuk pembungkus lapisan luar kawat, tahan gaya mekanik saat hubung singkat</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 Poin pengecekan pembelian: untuk produk berlabel internal "high density", selalu verifikasi apakah nilai densitas terukur benar-benar berada di rentang 1.10–1.30, agar tidak tertukar dengan MD (medium density).</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+      <span style="font-family:monospace;font-size:13px;font-weight:700;color:#c8a96e;background:rgba(0,0,0,.3);border:1px solid #c8a96e;border-radius:7px;padding:2px 10px">PI</span>
+      <span style="font-size:16px;font-weight:500;color:#f0f0ee">Selotip Kapton (Polyimide)</span>
+      <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">Material: Polyimide Film</span>
+      <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">Merek DuPont</span>
+      <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Kelas H 180–220°C</span>
+    </div>
+    <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">"Kapton" adalah nama merek dagang DuPont, material aslinya adalah <strong style="color:#f0f0ee">Polyimide Film</strong>, sering disebut juga "selotip PI" di industri. Berwarna kuning keemasan transparan khas, perekatnya biasanya silikon tahan suhu tinggi. Satu keluarga kimia dengan email PI (TI 240°C), tapi bentuknya selotip, bukan pernis cair.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Karakteristik Utama</div><div style="font-size:13px;line-height:1.6">Tahan panas kelas H+; sesaat tahan >400°C tanpa meleleh; kekuatan dielektrik tinggi; tahan pelarut, minyak, radiasi</div></div>
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Peran Tipikal</div><div style="font-size:13px;line-height:1.6">Penguatan lokal, pembungkus sambungan, bantalan isolasi slot; bukan isolasi utama kumparan (itu peran email/kawat kertas)</div></div>
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Aplikasi</div><div style="font-size:13px;line-height:1.6">Isolasi slot motor/generator; penguatan kumparan trafo kering suhu tinggi; penguatan sambungan email; kabel suhu tinggi, kumparan induksi</div></div>
+      <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Perbandingan dengan Email</div><div style="font-size:13px;line-height:1.6">Setara kelas AI (H, 220°C), performa suhu sesaat lebih unggul dari kertas TUP (110-120°C) dan Nomex (180°C)</div></div>
+    </div>
+    <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Isolasi slot motor</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Pembungkus ujung kumparan</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Penguatan kumparan trafo kering</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Penguatan isolasi sambungan</span>
+      <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Kumparan pemanas induksi</span>
+    </div>
+    <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 Panduan singkat untuk staf penjualan: <strong style="color:#c8a96e">Sistem kering (resin/pendinginan udara)→email; Sistem rendam-minyak→kawat kertas + minyak; Penguatan lokal/sambungan→selotip Kapton</strong>. Ketiganya saling melengkapi, bukan saling menggantikan. Untuk penjelasan lengkap kertas isolasi (Kraft/TUP/Nomex/klasifikasi densitas), lihat tab "📄 Panduan Kertas Isolasi" di atas.</div>
+  </div>
+</section>
+
   </div>
 
 </div>
 </div>
 <!-- end page-guide -->
+
+<div class="page-paper">
+<div style="padding:14px;max-width:900px;margin:0 auto">
+
+<div class="zh-only">
+  <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:18px;font-weight:500;color:#f0f0ee">絕緣紙採購入門指南</span>
+      <span style="font-family:monospace;font-size:11px;padding:3px 10px;border-radius:14px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);color:#c8a96e">採購知識</span>
+    </div>
+    <div style="font-size:13px;color:#8a8d93;margin-top:6px">紙種認識 · 密度分類 · 標準對照 · 適用產品 · 選紙決策指引 · 耐熱等級</div>
+  </div>
+<section id="s_PAPER_GUIDE" style="margin-bottom:32px">
+
+  <div style="background:#16181c;border:1px solid rgba(200,169,110,.2);border-radius:14px;padding:18px 20px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#c8a96e;text-transform:uppercase;margin-bottom:10px">什麼是絕緣紙（Insulation Paper）？</div>
+    <p style="font-size:14px;line-height:1.8;color:#d4d4d2;margin-bottom:10px">絕緣紙（Insulation Paper）是以硫酸鹽木漿（Kraft Pulp）或改質纖維為原料製成的電氣絕緣材料，纏繞於導體外層或作為層間絕緣，廣泛用於油浸式變壓器、電抗器的線圈繞組。絕緣紙本身乾燥時介電強度有限，<strong style="color:#f0f0ee">必須經變壓器油浸漬</strong>後，讓油滲入紙纖維孔隙，才能發揮完整的絕緣與散熱效果，形成「油紙絕緣系統」。</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#6bcb77;font-weight:600;margin-bottom:4px">⚡ 電氣絕緣</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">阻止相鄰導體間漏電，維持繞組耐壓等級</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#4ecdc4;font-weight:600;margin-bottom:4px">🔥 耐熱保護</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">長期工作溫度下維持聚合度(DP)與機械強度</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#f4a535;font-weight:600;margin-bottom:4px">🛡️ 機械支撐</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">抵抗短路電流產生的巨大機械應力與磨損</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#a78bfa;font-weight:600;margin-bottom:4px">🛢️ 油浸相容性</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">透氣度需適中，讓變壓器油能滲透散熱</div></div>
+    </div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">標準體系對照 — 採購時如何看懂檢測報告</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">標準</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">適用產品</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">代表型號</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Q/JLLS 20470</td><td style="padding:8px 12px;color:#a0a0a0">變壓器匝間絕緣紙（一般牛皮紙）</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">BZZ-50 / BZZ-75</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Q/JLLS 20471</td><td style="padding:8px 12px;color:#a0a0a0">電力電纜紙（一般牛皮紙）</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">DLZ-50 / DLZ-75</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Q/JLLS 20414</td><td style="padding:8px 12px;color:#a0a0a0">耐熱絕緣紙（TUP溫升紙）</td><td style="padding:8px 12px;font-family:monospace;color:#f4a535">NJZ-50 / NJC-50~180</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">IEC 60641 / ASTM D202</td><td style="padding:8px 12px;color:#a0a0a0">國際通用絕緣紙板測試方法</td><td style="padding:8px 12px;font-family:monospace;color:#8a8d93">國際規格書對照用</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 採購要點：檢測報告上的「Aging remaining rate（熱老化後抗張強度保留率）」與「Nitrogen content（含氮量）」兩項，是判斷是否為 TUP 耐熱紙的關鍵指標；一般牛皮紙的報告不會有這兩項。</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">絕緣紙密度分類 — LD / MD / HD</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">類別</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">密度範圍(g/cm³)</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">全名</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">特點與用途</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#6bcb77">LD</td><td style="padding:8px 12px;color:#a0a0a0">0.60–0.80</td><td style="padding:8px 12px;color:#f0f0ee">Low Density 低密度</td><td style="padding:8px 12px;color:#a0a0a0">高吸油性、柔軟，適合形狀複雜零件或油隙墊片，讓變壓器油容易滲透散熱</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#f4a535">MD</td><td style="padding:8px 12px;color:#a0a0a0">0.85–1.00</td><td style="padding:8px 12px;color:#f0f0ee">Medium Density 中密度</td><td style="padding:8px 12px;color:#a0a0a0">平衡型，兼具機械強度與吸油性，變壓器最通用類型，常用於層間絕緣</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#e85d5d">HD</td><td style="padding:8px 12px;color:#a0a0a0">1.10–1.30</td><td style="padding:8px 12px;color:#f0f0ee">High Density 高密度</td><td style="padding:8px 12px;color:#a0a0a0">高強度硬度大，用於導線外層包紮（電磁線繞包），抵抗短路時的巨大機械應力</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 採購核對重點：內部標示「高密度」的品項，務必核對實測密度值是否真的落在1.10–1.30區間——若實測值落在0.85–1.00，其實是MD中密度，建議與供應商或內部標準確認命名邏輯，避免規格對照時產生誤解。</div>
+  </div>
+
+  <!-- Kraft paper card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#6bcb77;background:rgba(0,0,0,.3);border:1px solid #6bcb77;border-radius:7px;padding:2px 10px">KRAFT</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">一般牛皮紙 Kraft Insulation Paper</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">Q/JLLS 20470/20471</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">BZZ / DLZ 系列</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Class A · 95–105°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">以100%高純度硫酸鹽化學木漿（Kraft Pulp）製成，未經耐熱改質，是油浸式變壓器最基礎、用量最大的絕緣紙種。密度多落在MD中密度區間（0.85–1.00 g/cm³），耐熱等級最低但成本最經濟。</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">主要特性</div><div style="font-size:13px;line-height:1.6">吸油性良好；電氣強度9.5kV/mm以上；抗張、撕裂強度符合標準即可</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">典型型號</div><div style="font-size:13px;line-height:1.6">BZZ-50/75（匝間絕緣紙）；DLZ-50/75（電力電纜紙）</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用產品</div><div style="font-size:13px;line-height:1.6">一般配電變壓器、油浸式變壓器線圈匝間絕緣、電力電纜包紮</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">不適合場合</div><div style="font-size:13px;line-height:1.6">熱點溫度長期超過105°C的高溫升設計；乾式變壓器（無油系統）</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">配電變壓器</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">油浸式主變壓器</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">電力電纜包紮</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">層間絕緣</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 採購量最大的品項，價格敏感度高。確認DP聚合度（新紙通常≥1000）及電氣強度是否達標即可，不需額外的熱老化測試數據。</div>
+  </div>
+
+  <!-- TUP paper card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#f4a535;background:rgba(0,0,0,.3);border:1px solid #f4a535;border-radius:7px;padding:2px 10px">TUP</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">耐熱溫升紙 Thermally Upgraded Paper</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">Q/JLLS 20414</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">NJZ / NJC 系列</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Class A–B · 110–120°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">在一般Kraft紙製程中加入含氮化合物處理（氰乙基化或添加二氰二胺），氮元素與纖維素中的水分反應，減少酸性物質生成，延緩纖維素分子鏈斷裂，讓熱點容許溫度提升10~20°C。</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">身分標記</div><div style="font-size:13px;line-height:1.6">檢測報告會有「Aging remaining rate（150°C,168h熱老化保留率≥75%）」與「Nitrogen content（含氮量1.1–2.3%）」兩項</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">典型型號</div><div style="font-size:13px;line-height:1.6">NJZ-50（耐熱絕緣紙）；NJC-50/80/130/180（不同厚度耐熱紙）</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用產品</div><div style="font-size:13px;line-height:1.6">高溫升設計變壓器；ONAN/ONAF大型變壓器；需延長使用壽命的場合</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">選用提醒</div><div style="font-size:13px;line-height:1.6">紙的耐熱優勢需搭配油品質量（氧化安定性、含水控制）才能真正發揮，油劣化會限制整體壽命</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">高溫升變壓器</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">大型電力變壓器</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">延壽命設計</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">高負載場合</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 客戶若指定「TU紙」「Thermally Upgraded」或耐熱溫升要求，就要採購此系列而非一般Kraft紙。價格較高，採購時務必確認客戶規格書是否真的要求TUP，避免over-spec增加成本。</div>
+  </div>
+
+  <!-- Nomex card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#e85d5d;background:rgba(0,0,0,.3);border:1px solid #e85d5d;border-radius:7px;padding:2px 10px">NOMEX</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">芳綸紙 Aramid Paper</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">DuPont Nomex</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">芳香族聚醯胺</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Class H(C) · 180–220°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">以芳香族聚醯胺纖維（非纖維素）製成，不是Kraft紙的改質版本，而是完全不同的高分子材料，耐熱等級大幅超越一般纖維素基絕緣紙，是變壓器絕緣紙中耐熱性最高的等級。</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">主要特性</div><div style="font-size:13px;line-height:1.6">耐熱180–220°C；不易燃；機械強度與尺寸穩定性優異；不含纖維素故不會產生2-FAL老化副產物</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用產品</div><div style="font-size:13px;line-height:1.6">乾式變壓器（F/H級）；特高壓/特高溫升油浸變壓器；牽引變壓器（軌道交通）</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">選材判斷</div><div style="font-size:13px;line-height:1.6">客戶規格書寫TU/Nomex，或絕緣系統等級F/H，或工作溫度超過105-120°C，就必須用此紙種而非HD一般紙</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">成本</div><div style="font-size:13px;line-height:1.6">成本中至高，明顯高於Kraft和TUP紙，屬客戶明確要求時才採購的品項</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">乾式變壓器</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">軌道交通牽引變壓器</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">特高溫升設計</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">長壽命高負載設備</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 現場選材判斷口訣：<strong style="color:#c8a96e">看絕緣系統等級（A/B用一般紙；F/H必須用Nomex）；看客戶規格書是否要求TU/Nomex；看工作溫度是否超過105–120°C</strong>——只要中一項，就不能用一般HD紙頂替。</div>
+  </div>
+
+  <!-- Kapton card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#c8a96e;background:rgba(0,0,0,.3);border:1px solid #c8a96e;border-radius:7px;padding:2px 10px">PI</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">Kapton 聚醯亞胺膠帶</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">材質：Polyimide Film</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">DuPont商標</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">H級 · 180–220°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">「Kapton」是杜邦（DuPont）的商標名稱，正式材質是<strong style="color:#f0f0ee">聚醯亞胺薄膜（Polyimide Film）</strong>，業界也俗稱「PI膠帶」，呈現特有琥珀色/金黃色半透明外觀，黏著劑通常是耐高溫矽利康膠。與PI漆包線（TI 240°C）同屬一個化學家族，但形態是膠帶而非液態漆或纏繞紙，主要角色是<strong style="color:#f0f0ee">局部補強</strong>而非主體繞組絕緣。</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">主要特性</div><div style="font-size:13px;line-height:1.6">耐熱H級以上；瞬間可承受400°C以上不熔化；介電強度高；耐溶劑、耐油、抗輻射</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">典型角色</div><div style="font-size:13px;line-height:1.6">局部補強、接頭包紮、槽絕緣襯墊；不做主體繞組絕緣</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">適用場合</div><div style="font-size:13px;line-height:1.6">馬達/發電機槽絕緣；乾式變壓器高溫繞組補強；漆包線接頭補強；高溫電纜、感應加熱線圈</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">與絕緣紙對照</div><div style="font-size:13px;line-height:1.6">耐熱等級接近Nomex（180-220°C），瞬間耐溫表現優於TUP紙（110-120°C）</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">馬達槽絕緣</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">線圈端部包紮</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">乾式變壓器繞組補強</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">接頭絕緣加強</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 Kapton不是拿來取代主體繞組的紙包線或漆包線，而是做局部補強、接頭包紮、槽絕緣襯墊的輔助角色，三者是互補關係。</div>
+  </div>
+
+  <!-- Quick selection table -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">絕緣紙快速選用指南 — 業務對客戶說明用</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:600px">
+    <thead><tr style="background:#1e2026">
+    <th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">應用場合</th>
+    <th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">建議紙種</th>
+    <th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">典型型號</th>
+    </tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">一般配電變壓器，油浸式，105°C以下</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">一般牛皮紙(Kraft)</td><td style="padding:8px 12px;color:#a0a0a0">BZZ-50/75、DLZ-50/75</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">大型電力變壓器，高溫升設計，延壽命</td><td style="padding:8px 12px;font-family:monospace;color:#f4a535">TUP耐熱溫升紙</td><td style="padding:8px 12px;color:#a0a0a0">NJZ-50、NJC-50/80/130/180</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">乾式變壓器（F/H級）、牽引變壓器</td><td style="padding:8px 12px;font-family:monospace;color:#e85d5d">Nomex芳綸紙</td><td style="padding:8px 12px;color:#a0a0a0">Nomex 410/411系列</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">導線外層繞包，抗短路機械應力</td><td style="padding:8px 12px;font-family:monospace;color:#e85d5d">HD高密度紙</td><td style="padding:8px 12px;color:#a0a0a0">密度需核實落在1.10–1.30 g/cm³</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">局部補強、接頭包紮、槽絕緣</td><td style="padding:8px 12px;color:#c8c9cc">Kapton聚醯亞胺膠帶</td><td style="padding:8px 12px;color:#a0a0a0">依廠商規格選用</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- TI-style grid for paper -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:6px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">絕緣紙耐熱等級（Insulation Class）說明</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px">
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #6bcb77"><div style="font-size:11px;color:#6bcb77;font-weight:700;margin-bottom:3px">Class A</div><div style="font-size:11px;color:#8a8d93">95–105°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">一般Kraft紙<br>油浸配電變壓器</div></div>
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #f4a535"><div style="font-size:11px;color:#f4a535;font-weight:700;margin-bottom:3px">Class A–B</div><div style="font-size:11px;color:#8a8d93">110–120°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">TUP耐熱溫升紙<br>大型電力變壓器</div></div>
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #e85d5d"><div style="font-size:11px;color:#e85d5d;font-weight:700;margin-bottom:3px">Class H</div><div style="font-size:11px;color:#8a8d93">180°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">Nomex芳綸紙<br>乾式變壓器</div></div>
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #c8a96e"><div style="font-size:11px;color:#c8a96e;font-weight:700;margin-bottom:3px">Class H+</div><div style="font-size:11px;color:#8a8d93">220°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">Kapton聚醯亞胺<br>局部補強專用</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:12px;color:#6a6d73;line-height:1.6">※ 紙的耐熱等級不能只看紙本身：油浸變壓器整體壽命由「油＋紙」共同決定，油的氧化安定性、含水量控制、密封系統設計都會限制紙能否真正發揮耐熱優勢。實際選紙時應以客戶指定的絕緣系統等級（Insulation Class）為依據。</div>
+  </div>
+
+</section>
+</div>
+
+<div class="id-only">
+  <div style="margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <span style="font-size:18px;font-weight:500;color:#f0f0ee">Panduan Pengenalan Kertas Isolasi</span>
+      <span style="font-family:monospace;font-size:11px;padding:3px 10px;border-radius:14px;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);color:#c8a96e">Pengetahuan Pembelian</span>
+    </div>
+    <div style="font-size:13px;color:#8a8d93;margin-top:6px">Pengenalan kertas · Klasifikasi densitas · Perbandingan standar · Produk sesuai · Panduan pemilihan · Kelas termal</div>
+  </div>
+<section id="s_PAPER_GUIDE" style="margin-bottom:32px">
+
+  <div style="background:#16181c;border:1px solid rgba(200,169,110,.2);border-radius:14px;padding:18px 20px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#c8a96e;text-transform:uppercase;margin-bottom:10px">Apa itu Kertas Isolasi (Insulation Paper)?</div>
+    <p style="font-size:14px;line-height:1.8;color:#d4d4d2;margin-bottom:10px">Kertas Isolasi adalah material isolasi listrik yang dibuat dari pulp kraft sulfat murni atau serat termodifikasi, dililitkan di sekitar konduktor atau digunakan sebagai isolasi antar-lapisan, banyak digunakan pada kumparan transformator rendam-minyak dan reaktor. Kertas isolasi sendiri memiliki kekuatan dielektrik terbatas saat kering — <strong style="color:#f0f0ee">harus direndam dalam minyak transformator</strong> agar minyak meresap ke pori-pori serat kertas, baru bisa memberikan isolasi dan pendinginan penuh, membentuk "sistem isolasi minyak-kertas".</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#6bcb77;font-weight:600;margin-bottom:4px">⚡ Isolasi Listrik</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Mencegah kebocoran arus antar konduktor, menjaga kelas tegangan kumparan</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#4ecdc4;font-weight:600;margin-bottom:4px">🔥 Proteksi Panas</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Menjaga derajat polimerisasi (DP) dan kekuatan mekanik pada suhu operasi jangka panjang</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#f4a535;font-weight:600;margin-bottom:4px">🛡️ Penopang Mekanik</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Menahan gaya mekanik besar dan abrasi akibat arus hubung singkat</div></div>
+      <div style="background:#1e2026;border-radius:9px;padding:10px 12px"><div style="font-size:11px;color:#a78bfa;font-weight:600;margin-bottom:4px">🛢️ Kompatibilitas Minyak</div><div style="font-size:12px;color:#a0a0a0;line-height:1.5">Permeabilitas udara harus sesuai agar minyak trafo bisa meresap untuk pendinginan</div></div>
+    </div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">Perbandingan Standar — Cara Membaca Laporan Uji</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Standar</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Produk Terkait</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Tipe Representatif</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Q/JLLS 20470</td><td style="padding:8px 12px;color:#a0a0a0">Kertas isolasi antar-lilitan trafo (kertas kraft biasa)</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">BZZ-50 / BZZ-75</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Q/JLLS 20471</td><td style="padding:8px 12px;color:#a0a0a0">Kertas kabel listrik (kertas kraft biasa)</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">DLZ-50 / DLZ-75</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">Q/JLLS 20414</td><td style="padding:8px 12px;color:#a0a0a0">Kertas isolasi tahan panas (kertas TUP)</td><td style="padding:8px 12px;font-family:monospace;color:#f4a535">NJZ-50 / NJC-50~180</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee;font-weight:500">IEC 60641 / ASTM D202</td><td style="padding:8px 12px;color:#a0a0a0">Metode uji papan/kertas isolasi standar internasional</td><td style="padding:8px 12px;font-family:monospace;color:#8a8d93">Referensi spek internasional</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 Poin pembelian: item "Aging remaining rate" (retensi kekuatan tarik setelah penuaan panas) dan "Nitrogen content" (kadar nitrogen) pada laporan uji adalah indikator kunci untuk menentukan apakah kertas termasuk TUP; laporan kertas kraft biasa tidak memiliki dua item ini.</div>
+  </div>
+
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">Klasifikasi Densitas Kertas Isolasi — LD / MD / HD</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:560px">
+    <thead><tr style="background:#1e2026"><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Kategori</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Rentang Densitas (g/cm³)</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Nama Lengkap</th><th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Karakteristik & Kegunaan</th></tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#6bcb77">LD</td><td style="padding:8px 12px;color:#a0a0a0">0.60–0.80</td><td style="padding:8px 12px;color:#f0f0ee">Low Density</td><td style="padding:8px 12px;color:#a0a0a0">Penyerapan minyak tinggi, lentur, cocok komponen bentuk rumit atau spacer celah minyak, memudahkan minyak trafo meresap untuk pendinginan</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#f4a535">MD</td><td style="padding:8px 12px;color:#a0a0a0">0.85–1.00</td><td style="padding:8px 12px;color:#f0f0ee">Medium Density</td><td style="padding:8px 12px;color:#a0a0a0">Tipe seimbang, kekuatan mekanik & penyerapan minyak baik, jenis paling umum di trafo, untuk isolasi antar-lapisan</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;font-family:monospace;font-weight:700;color:#e85d5d">HD</td><td style="padding:8px 12px;color:#a0a0a0">1.10–1.30</td><td style="padding:8px 12px;color:#f0f0ee">High Density</td><td style="padding:8px 12px;color:#a0a0a0">Kekuatan & kekerasan tinggi, untuk pembungkus lapisan luar kawat, tahan gaya mekanik besar saat hubung singkat</td></tr>
+    </tbody></table></div>
+    <div style="margin-top:10px;padding:9px 12px;background:rgba(244,165,53,.08);border-left:3px solid #f4a535;border-radius:0 8px 8px 0;font-size:12px;color:#b08030;line-height:1.6">💡 Poin pengecekan pembelian: untuk produk berlabel internal "high density", selalu verifikasi apakah nilai densitas terukur benar-benar di rentang 1.10–1.30 — jika hasil ukur di 0.85–1.00, itu sebenarnya MD, sebaiknya konfirmasi logika penamaan dengan supplier atau standar internal.</div>
+  </div>
+
+  <!-- Kraft paper card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#6bcb77;background:rgba(0,0,0,.3);border:1px solid #6bcb77;border-radius:7px;padding:2px 10px">KRAFT</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">Kertas Kraft Biasa</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">Q/JLLS 20470/20471</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">Seri BZZ / DLZ</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Class A · 95–105°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">Dibuat dari pulp kraft sulfat murni 100%, tanpa modifikasi tahan panas, merupakan kertas isolasi paling dasar dan volume terbanyak untuk trafo rendam-minyak. Densitas umumnya berada di rentang MD (0.85–1.00 g/cm³), kelas termal paling rendah namun paling ekonomis.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Karakteristik Utama</div><div style="font-size:13px;line-height:1.6">Penyerapan minyak baik; kekuatan dielektrik ≥9.5kV/mm; kekuatan tarik & sobek sesuai standar</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Tipe Tipikal</div><div style="font-size:13px;line-height:1.6">BZZ-50/75 (isolasi antar-lilitan); DLZ-50/75 (kertas kabel listrik)</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Aplikasi</div><div style="font-size:13px;line-height:1.6">Trafo distribusi umum, isolasi antar-lilitan trafo rendam-minyak, pembungkus kabel listrik</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Tidak Cocok Untuk</div><div style="font-size:13px;line-height:1.6">Desain suhu hot-spot jangka panjang di atas 105°C; trafo kering (sistem tanpa minyak)</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Trafo distribusi</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Trafo utama rendam-minyak</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Pembungkus kabel listrik</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Isolasi antar-lapisan</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 Item pembelian volume terbesar, sensitif harga. Cukup verifikasi DP (kertas baru umumnya ≥1000) dan kekuatan dielektrik sesuai standar, tidak perlu data uji penuaan panas tambahan.</div>
+  </div>
+
+  <!-- TUP paper card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#f4a535;background:rgba(0,0,0,.3);border:1px solid #f4a535;border-radius:7px;padding:2px 10px">TUP</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">Kertas Tahan Panas (Thermally Upgraded Paper)</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">Q/JLLS 20414</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">Seri NJZ / NJC</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Class A–B · 110–120°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">Kertas kraft biasa diproses dengan senyawa nitrogen (sianoetilasi atau penambahan disianodiamida). Nitrogen bereaksi dengan air di dalam selulosa, mengurangi pembentukan zat asam dan memperlambat pemutusan rantai molekul selulosa, sehingga suhu hot-spot yang diizinkan naik 10–20°C.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Tanda Pengenal</div><div style="font-size:13px;line-height:1.6">Laporan uji memiliki "Aging remaining rate" (150°C, 168h, retensi ≥75%) dan "Nitrogen content" (kadar nitrogen 1.1–2.3%)</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Tipe Tipikal</div><div style="font-size:13px;line-height:1.6">NJZ-50 (kertas isolasi tahan panas); NJC-50/80/130/180 (berbagai ketebalan)</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Aplikasi</div><div style="font-size:13px;line-height:1.6">Desain trafo suhu tinggi; trafo daya besar ONAN/ONAF; aplikasi yang butuh perpanjangan umur pakai</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Catatan Pemilihan</div><div style="font-size:13px;line-height:1.6">Keunggulan panas kertas hanya tercapai jika didukung kualitas minyak (stabilitas oksidasi, kontrol air) — degradasi minyak membatasi umur keseluruhan</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Trafo suhu tinggi</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Trafo daya besar</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Desain umur panjang</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Aplikasi beban tinggi</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 Jika pelanggan menentukan "kertas TU", "Thermally Upgraded", atau syarat suhu tinggi, harus beli seri ini bukan kertas kraft biasa. Harga lebih tinggi — pastikan spek pelanggan memang membutuhkan TUP agar tidak over-spec dan menambah biaya.</div>
+  </div>
+
+  <!-- Nomex card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#e85d5d;background:rgba(0,0,0,.3);border:1px solid #e85d5d;border-radius:7px;padding:2px 10px">NOMEX</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">Kertas Aramid (Nomex)</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">DuPont Nomex</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">Poliamida Aromatik</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Class H(C) · 180–220°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">Dibuat dari serat poliamida aromatik (bukan selulosa), bukan versi modifikasi kertas kraft, melainkan material polimer yang sepenuhnya berbeda. Kelas termalnya jauh melampaui kertas isolasi berbasis selulosa, merupakan kelas termal tertinggi di antara kertas isolasi trafo.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Karakteristik Utama</div><div style="font-size:13px;line-height:1.6">Tahan panas 180–220°C; tidak mudah terbakar; kekuatan mekanik & stabilitas dimensi sangat baik; tanpa selulosa jadi tidak menghasilkan produk penuaan 2-FAL</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Aplikasi</div><div style="font-size:13px;line-height:1.6">Trafo kering (kelas F/H); trafo rendam-minyak tegangan/suhu ekstra tinggi; trafo traksi (kereta rel)</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Penentuan Material</div><div style="font-size:13px;line-height:1.6">Jika spek pelanggan tertulis TU/Nomex, atau kelas isolasi F/H, atau suhu kerja di atas 105-120°C, wajib gunakan kertas ini bukan HD biasa</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Biaya</div><div style="font-size:13px;line-height:1.6">Biaya sedang-tinggi, jauh lebih mahal dari Kraft dan TUP, hanya dibeli jika pelanggan secara eksplisit meminta</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Trafo kering</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Trafo traksi kereta rel</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Desain suhu ekstra tinggi</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Peralatan umur panjang beban tinggi</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 Panduan pemilihan material di lapangan: <strong style="color:#c8a96e">lihat kelas sistem isolasi (A/B pakai kertas biasa; F/H wajib Nomex); lihat apakah spek pelanggan minta TU/Nomex; lihat apakah suhu kerja di atas 105–120°C</strong> — jika salah satu terpenuhi, tidak boleh pakai HD biasa sebagai pengganti.</div>
+  </div>
+
+  <!-- Kapton card -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;margin-bottom:10px;overflow:hidden"><div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 16px 10px;border-bottom:1px solid rgba(255,255,255,.06)">
+    <span style="font-family:monospace;font-size:13px;font-weight:700;color:#c8a96e;background:rgba(0,0,0,.3);border:1px solid #c8a96e;border-radius:7px;padding:2px 10px">PI</span>
+    <span style="font-size:16px;font-weight:500;color:#f0f0ee">Selotip Kapton (Polyimide)</span>
+    <span style="font-family:monospace;font-size:10px;color:#8a8d93;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:1px 7px">Material: Polyimide Film</span>
+    <span style="font-size:10px;color:#c8a96e;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:5px;padding:1px 7px">Merek DuPont</span>
+    <span style="font-family:monospace;font-size:11px;padding:2px 10px;border-radius:14px;background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:#c8a96e;margin-left:auto">Kelas H · 180–220°C</span>
+  </div>
+  <div style="padding:12px 16px 14px;font-size:13px;color:#c8c9cc;line-height:1.6">"Kapton" adalah nama merek dagang DuPont, material aslinya adalah <strong style="color:#f0f0ee">Polyimide Film</strong>, sering disebut juga "selotip PI" di industri. Berwarna kuning keemasan transparan khas, perekatnya biasanya silikon tahan suhu tinggi. Satu keluarga kimia dengan email PI (TI 240°C), tapi bentuknya selotip — perannya utamanya <strong style="color:#f0f0ee">penguatan lokal</strong>, bukan isolasi utama kumparan.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 16px 14px">
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Karakteristik Utama</div><div style="font-size:13px;line-height:1.6">Tahan panas kelas H+; sesaat tahan >400°C tanpa meleleh; kekuatan dielektrik tinggi; tahan pelarut, minyak, radiasi</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Peran Tipikal</div><div style="font-size:13px;line-height:1.6">Penguatan lokal, pembungkus sambungan, bantalan isolasi slot; bukan isolasi utama kumparan</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Aplikasi</div><div style="font-size:13px;line-height:1.6">Isolasi slot motor/generator; penguatan kumparan trafo kering suhu tinggi; penguatan sambungan email; kabel suhu tinggi, kumparan induksi</div></div>
+    <div style="background:#1e2026;border-radius:10px;padding:10px 12px"><div style="font-size:10px;letter-spacing:.07em;color:#8a8d93;text-transform:uppercase;margin-bottom:5px;font-family:monospace">Perbandingan Kertas</div><div style="font-size:13px;line-height:1.6">Setara Nomex (180-220°C), performa suhu sesaat lebih unggul dari kertas TUP (110-120°C)</div></div>
+  </div>
+  <div style="padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:6px">
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Isolasi slot motor</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Pembungkus ujung kumparan</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Penguatan kumparan trafo kering</span>
+    <span style="font-size:11px;padding:3px 9px;background:#1e2026;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#c8c9cc;white-space:nowrap">Penguatan isolasi sambungan</span>
+  </div>
+  <div style="margin:0 16px 14px;padding:10px 12px;background:rgba(200,169,110,.07);border-left:3px solid #c8a96e;border-radius:0 8px 8px 0;font-size:12px;color:#b0a07a;line-height:1.6">💡 Kapton bukan pengganti kawat kertas atau kawat email pada isolasi utama kumparan, melainkan peran pendukung untuk penguatan lokal, pembungkus sambungan, dan bantalan isolasi slot — ketiganya saling melengkapi.</div>
+  </div>
+
+  <!-- Quick selection table -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:16px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">Panduan Cepat Pemilihan Kertas Isolasi — Versi Penjualan</div>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px">
+    <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:600px">
+    <thead><tr style="background:#1e2026">
+    <th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Aplikasi</th>
+    <th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Kertas Disarankan</th>
+    <th style="padding:8px 12px;text-align:left;color:#8a8d93;font-weight:500">Tipe Tipikal</th>
+    </tr></thead>
+    <tbody>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">Trafo distribusi umum, rendam-minyak, di bawah 105°C</td><td style="padding:8px 12px;font-family:monospace;color:#6bcb77">Kertas Kraft biasa</td><td style="padding:8px 12px;color:#a0a0a0">BZZ-50/75, DLZ-50/75</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">Trafo daya besar, desain suhu tinggi, umur panjang</td><td style="padding:8px 12px;font-family:monospace;color:#f4a535">Kertas TUP</td><td style="padding:8px 12px;color:#a0a0a0">NJZ-50, NJC-50/80/130/180</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">Trafo kering (kelas F/H), trafo traksi</td><td style="padding:8px 12px;font-family:monospace;color:#e85d5d">Kertas Aramid Nomex</td><td style="padding:8px 12px;color:#a0a0a0">Seri Nomex 410/411</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">Pembungkus lapisan luar kawat, tahan gaya hubung singkat</td><td style="padding:8px 12px;font-family:monospace;color:#e85d5d">Kertas HD</td><td style="padding:8px 12px;color:#a0a0a0">Densitas harus diverifikasi 1.10–1.30 g/cm³</td></tr>
+    <tr style="border-top:1px solid rgba(255,255,255,.05)"><td style="padding:8px 12px;color:#f0f0ee">Penguatan lokal, pembungkus sambungan, isolasi slot</td><td style="padding:8px 12px;color:#c8c9cc">Selotip Kapton</td><td style="padding:8px 12px;color:#a0a0a0">Sesuai spek pabrikan</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <!-- TI-style grid for paper -->
+  <div style="background:#16181c;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px 18px;margin-bottom:6px">
+    <div style="font-family:monospace;font-size:10px;letter-spacing:.1em;color:#8a8d93;text-transform:uppercase;margin-bottom:12px">Penjelasan Kelas Termal Kertas Isolasi (Insulation Class)</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px">
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #6bcb77"><div style="font-size:11px;color:#6bcb77;font-weight:700;margin-bottom:3px">Class A</div><div style="font-size:11px;color:#8a8d93">95–105°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">Kertas Kraft biasa<br>Trafo distribusi rendam-minyak</div></div>
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #f4a535"><div style="font-size:11px;color:#f4a535;font-weight:700;margin-bottom:3px">Class A–B</div><div style="font-size:11px;color:#8a8d93">110–120°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">Kertas TUP<br>Trafo daya besar</div></div>
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #e85d5d"><div style="font-size:11px;color:#e85d5d;font-weight:700;margin-bottom:3px">Class H</div><div style="font-size:11px;color:#8a8d93">180°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">Kertas Aramid Nomex<br>Trafo kering</div></div>
+    <div style="background:#1e2026;border-radius:9px;padding:10px 12px;border-top:2px solid #c8a96e"><div style="font-size:11px;color:#c8a96e;font-weight:700;margin-bottom:3px">Class H+</div><div style="font-size:11px;color:#8a8d93">220°C</div><div style="font-size:12px;color:#c8c9cc;margin-top:5px">Kapton Polyimide<br>Khusus penguatan lokal</div></div>
+    </div>
+    <div style="margin-top:10px;font-size:12px;color:#6a6d73;line-height:1.6">※ Kelas termal kertas tidak bisa dilihat dari kertas saja: umur keseluruhan trafo rendam-minyak ditentukan bersama oleh "minyak + kertas". Stabilitas oksidasi minyak, kontrol kadar air, dan desain sistem penyegelan akan membatasi apakah keunggulan panas kertas benar-benar tercapai. Gunakan kelas sistem isolasi (Insulation Class) yang ditentukan pelanggan sebagai acuan pemilihan.</div>
+  </div>
+
+</section>
+</div>
+
+</div>
+</div>
+<!-- end page-paper -->
+
 
 
 <script>
@@ -4710,16 +5229,20 @@ var _currentTab = 'catalog';
 function setTab(tab) {
   _currentTab = tab;
   var body = document.body;
-  body.classList.remove('tab-catalog','tab-guide');
+  body.classList.remove('tab-catalog','tab-guide','tab-paper');
   body.classList.add('tab-' + tab);
   var btnCat = document.getElementById('tab-btn-catalog');
   var btnGui = document.getElementById('tab-btn-guide');
-  if (tab === 'catalog') {
-    btnCat.style.background='rgba(200,169,110,.18)'; btnCat.style.color='#c8a96e'; btnCat.style.fontWeight='600';
-    btnGui.style.background='transparent'; btnGui.style.color='#8a8d93'; btnGui.style.fontWeight='400';
-  } else {
-    btnGui.style.background='rgba(200,169,110,.18)'; btnGui.style.color='#c8a96e'; btnGui.style.fontWeight='600';
-    btnCat.style.background='transparent'; btnCat.style.color='#8a8d93'; btnCat.style.fontWeight='400';
+  var btnPap = document.getElementById('tab-btn-paper');
+  var buttons = {catalog: btnCat, guide: btnGui, paper: btnPap};
+  for (var key in buttons) {
+    var b = buttons[key];
+    if (!b) continue;
+    if (key === tab) {
+      b.style.background='rgba(200,169,110,.18)'; b.style.color='#c8a96e'; b.style.fontWeight='600';
+    } else {
+      b.style.background='transparent'; b.style.color='#8a8d93'; b.style.fontWeight='400';
+    }
   }
   window.scrollTo(0,0);
 }
